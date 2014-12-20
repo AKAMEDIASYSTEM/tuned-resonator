@@ -43,25 +43,22 @@ from lxml import etree
 from lxml import objectify
 import requests
 import keys
+import feedparser
+# example: d = feedparser.parse('http://feedparser.org/docs/examples/atom10.xml')
+# d['feed']['title']
 
+
+## curriculum example - total number of keywords in last 7200 minutes, ie 5 days
 # q = requests.get(keys.url, params=keys.params)
 # q.json()
 # print q.text
 
+## feedparser example - number of items in some feed
+d = feedparser.parse(keys.feedurl)
+print d
+
 
 # create XML 
-# root = etree.XMLID('<service-group><name replace-wildcards="yes">https://data.sparkfun.com/streams/RMMAa2YvMyHxRr123jqG/</name><service><host-name>data.sparkfun.com</host-name><type>_http._tcp</type><port>80</port><txt-record>path=/streams/RMMAa2YvMyHxRr123jqG/</txt-record></service></service-group>')
-# another child with text
-# for i in enumerate(root[0]):
-# 	print i
-# child = etree.Element('child')
-# child.text = 'some text'
-# # root.append(child)
-# print root.get('name')
-# # pretty string
-# s = etree.tostring(root, pretty_print=True)
-# print s
-
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
