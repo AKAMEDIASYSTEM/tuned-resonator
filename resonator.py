@@ -43,8 +43,9 @@ If people are stuck on older versions, please let us know (or feel free add it y
 from lxml import etree
 
 # create XML 
-root = etree.Element('root')
-root.append(etree.Element('child'))
+root = etree.Element('service-group')
+child1 = etree.subElement(root, 'name')
+child1.set('replace-wildcards'='yes')
 # another child with text
 child = etree.Element('child')
 child.text = 'some text'
