@@ -20,7 +20,6 @@ You'll then place a '.service' file into the /etc/avahi/services directory. Our 
 
 <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
 <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
-
 <service-group>
   <name replace-wildcards="yes">http://www.mycompany.com/xyz.html</name>
   <service>
@@ -42,7 +41,12 @@ If people are stuck on older versions, please let us know (or feel free add it y
 
 from lxml import etree
 from lxml import objectify
-from Adafruit_BBIO import ADC as adc
+import requests
+import keys
+
+# q = requests.get(keys.url, params=keys.params)
+# q.json()
+# print q.text
 
 
 # create XML 
@@ -61,7 +65,7 @@ from Adafruit_BBIO import ADC as adc
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
-t_name._setText('https://data.sparkfun.com/streams/RMMAa2YvMyHxRr123jqG/')
+t_name._setText('http://akamediasystem.com?total=%s' % 10)
 t_service = objectify.SubElement(root, 'service')
 tt_hostname = objectify.SubElement(t_service, 'host-name')
 tt_hostname._setText('data.sparkfun.com')
@@ -72,11 +76,11 @@ tt_port._setText('80')
 tt_txtrecord = objectify.SubElement(t_service, 'txt-record')
 tt_txtrecord._setText('path=/streams/RMMAa2YvMyHxRr123jqG/')
 objectify.deannotate(root, cleanup_namespaces=True)
-print etree.tostring(root, pretty_print=True)
-
-
-
-
-
-
+s = etree.tostring(root, pretty_print=True)
+print s
+s = '<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group SYSTEM "avahi-service.dtd">'+s
+print s
+f = open('~/etc/avahi/services/curriculum.service', 'w')
+f.write(s)
+f.close()
 
