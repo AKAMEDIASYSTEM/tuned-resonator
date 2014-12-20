@@ -40,7 +40,7 @@ If people are stuck on older versions, please let us know (or feel free add it y
 
 '''
 
-from lxml import etree
+from lxml import *
 
 # create XML 
 root = etree.Element('service-group')
