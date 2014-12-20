@@ -44,6 +44,7 @@ from lxml import objectify
 import requests
 import keys
 import feedparser
+import json
 # example: d = feedparser.parse('http://feedparser.org/docs/examples/atom10.xml')
 # d['feed']['title']
 
@@ -54,15 +55,24 @@ import feedparser
 # print q.text
 
 ## feedparser example - number of items in some feed
-d = feedparser.parse(keys.feedurl)
-print d
+# d = feedparser.parse(keys.feedurl)
+# print d['feed']['summary']
+
+p = {'method':'brooklyn.integers.create'}
+i = requests.post('http://api.brooklynintegers.com/rest/', params=p)
+j = json.loads(i.content)
+a = j['integers'][0]['integer']
+# hey you see the above four lines? It's fucking stupid design that I have to do that to get a goddamn API result.
+# and yes, I know it's  joke API
+print a
+
 
 
 # create XML 
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
-t_name._setText('http://akamediasystem.com?total=%s' % 100)
+t_name._setText('http://akamediasystem.com?total=%s' % a)
 t_service = objectify.SubElement(root, 'service')
 tt_hostname = objectify.SubElement(t_service, 'host-name')
 tt_hostname._setText('data.sparkfun.com')
@@ -73,9 +83,7 @@ tt_port._setText('80')
 tt_txtrecord = objectify.SubElement(t_service, 'txt-record')
 tt_txtrecord._setText('path=/streams/RMMAa2YvMyHxRr123jqG/')
 objectify.deannotate(root, cleanup_namespaces=True)
-s = etree.tostring(root, pretty_print=True)
-print s
-s = '<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group SYSTEM "avahi-service.dtd">'+s
+s = '<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group SYSTEM "avahi-service.dtd">'+etree.tostring(root, pretty_print=True)
 print s
 f = open('/etc/avahi/services/curriculum.service', 'w')
 f.write(s)
