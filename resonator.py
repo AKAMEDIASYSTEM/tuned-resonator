@@ -80,7 +80,7 @@ s = etree.tostring(root, pretty_print=True)
 print s
 s = '<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group SYSTEM "avahi-service.dtd">'+s
 print s
-f = open('~/etc/avahi/services/curriculum.service', 'w')
+f = open('/etc/avahi/services/curriculum.service', 'w')
 f.write(s)
 f.close()
 
