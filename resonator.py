@@ -79,7 +79,7 @@ tt_type._setText('_http._tcp')
 tt_port = objectify.SubElement(t_service, 'port')
 tt_port._setText('80')
 tt_txtrecord = objectify.SubElement(t_service, 'txt-record')
-tt_txtrecord._setText('?total=%s' % a)
+tt_txtrecord._setText('path=/?total=%s' % a)
 objectify.deannotate(root, cleanup_namespaces=True)
 s = '<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group SYSTEM "avahi-service.dtd">'+etree.tostring(root, pretty_print=True)
 # print s
