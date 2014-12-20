@@ -42,6 +42,8 @@ If people are stuck on older versions, please let us know (or feel free add it y
 
 from lxml import etree
 from lxml import objectify
+from Adafruit_BBIO import ADC as adc
+
 
 # create XML 
 # root = etree.XMLID('<service-group><name replace-wildcards="yes">https://data.sparkfun.com/streams/RMMAa2YvMyHxRr123jqG/</name><service><host-name>data.sparkfun.com</host-name><type>_http._tcp</type><port>80</port><txt-record>path=/streams/RMMAa2YvMyHxRr123jqG/</txt-record></service></service-group>')
