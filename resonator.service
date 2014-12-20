@@ -4,5 +4,5 @@ Description=AKA tuned-resonator service
 [Service]
 Type=simple
 WorkingDirectory=/root/tuned-resonator/
-ExecStart=/usr/bin/python resonator.py
+ExecStart=python resonator.py
 KillMode=process
