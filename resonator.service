@@ -3,6 +3,6 @@ Description=AKA tuned-resonator service
 
 [Service]
 Type=simple
-WorkingDirectory=/home/root/tuned-resonator/
+WorkingDirectory=/root/tuned-resonator/
 ExecStart=/usr/bin/python resonator.py
 KillMode=process
