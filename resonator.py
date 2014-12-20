@@ -65,7 +65,7 @@ import keys
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
-t_name._setText('http://akamediasystem.com?total=%s' % 10)
+t_name._setText('http://akamediasystem.com?total=%s' % 100)
 t_service = objectify.SubElement(root, 'service')
 tt_hostname = objectify.SubElement(t_service, 'host-name')
 tt_hostname._setText('data.sparkfun.com')
