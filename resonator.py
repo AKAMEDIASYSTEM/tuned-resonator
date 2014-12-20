@@ -44,7 +44,7 @@ from lxml import etree
 
 
 # create XML 
-root = etree.XML('<service-group><name replace-wildcards="yes">http://www.mycompany.com/xyz.html</name><service><host-name>www.mycompany.com</host-name>   <type>_http._tcp</type>   <port>80</port>   <txt-record>path=/xyz.html</txt-record> </service></service-group>')
+root = etree.XML('<service-group><name replace-wildcards="yes">http://www.akamediasystem.com/</name><service><host-name>www.akamediasystem.com</host-name><type>_http._tcp</type><port>80</port><txt-record>path=/xyz.html</txt-record></service></service-group>')
 # another child with text
 child = etree.Element('child')
 child.text = 'some text'
