@@ -41,15 +41,40 @@ If people are stuck on older versions, please let us know (or feel free add it y
 '''
 
 from lxml import etree
-
+from lxml import objectify
 
 # create XML 
-root = etree.XML('<service-group><name replace-wildcards="yes">http://www.akamediasystem.com/</name><service><host-name>www.akamediasystem.com</host-name><type>_http._tcp</type><port>80</port><txt-record>path=/xyz.html</txt-record></service></service-group>')
+# root = etree.XMLID('<service-group><name replace-wildcards="yes">https://data.sparkfun.com/streams/RMMAa2YvMyHxRr123jqG/</name><service><host-name>data.sparkfun.com</host-name><type>_http._tcp</type><port>80</port><txt-record>path=/streams/RMMAa2YvMyHxRr123jqG/</txt-record></service></service-group>')
 # another child with text
-child = etree.Element('child')
-child.text = 'some text'
-root.append(child)
+# for i in enumerate(root[0]):
+# 	print i
+# child = etree.Element('child')
+# child.text = 'some text'
+# # root.append(child)
+# print root.get('name')
+# # pretty string
+# s = etree.tostring(root, pretty_print=True)
+# print s
 
-# pretty string
-s = etree.tostring(root, pretty_print=True)
-print s
+root = objectify.Element('service-group')
+t_name = objectify.SubElement(root, 'name')
+t_name.attrib['replace-wildcards'] = 'yes'
+t_name._setText('https://data.sparkfun.com/streams/RMMAa2YvMyHxRr123jqG/')
+t_service = objectify.SubElement(root, 'service')
+tt_hostname = objectify.SubElement(t_service, 'host-name')
+tt_hostname._setText('data.sparkfun.com')
+tt_type = objectify.SubElement(t_service, 'type')
+tt_type._setText('_http._tcp')
+tt_port = objectify.SubElement(t_service, 'port')
+tt_port._setText('80')
+tt_txtrecord = objectify.SubElement(t_service, 'txt-record')
+tt_txtrecord._setText('path=/streams/RMMAa2YvMyHxRr123jqG/')
+objectify.deannotate(root, cleanup_namespaces=True)
+print etree.tostring(root, pretty_print=True)
+
+
+
+
+
+
+
