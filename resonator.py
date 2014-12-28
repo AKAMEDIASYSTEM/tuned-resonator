@@ -58,11 +58,13 @@ import json
 # d = feedparser.parse(keys.feedurl)
 # print d['feed']['summary']
 
+local_url = '192.168.0.113'
+
 p = {'method':'brooklyn.integers.create'}
 i = requests.post('http://api.brooklynintegers.com/rest/', params=p)
 j = json.loads(i.content)
 a = j['integers'][0]['integer']
-# hey you see the above four lines? It's fucking stupid design that I have to do that to get a goddamn API result.
+# hey you see the above four lines? It sucks that I have to do that to get a goddamn API result.
 # and yes, I know it's  joke API
 print a
 
@@ -70,7 +72,8 @@ print a
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
-t_name._setText('http://akamediasystem.com?total=%s' % a)
+# t_name._setText('http://akamediasystem.com?total=%s' % a)
+t_name._setText('http://192.168.1.113/?total=%s' % a)
 t_service = objectify.SubElement(root, 'service')
 tt_hostname = objectify.SubElement(t_service, 'host-name')
 tt_hostname._setText('http://akamediasystem.com')
