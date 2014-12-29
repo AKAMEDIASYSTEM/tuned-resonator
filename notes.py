@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 
-soup = BeautifulSoup('your_html_file.html.html')
+soup = BeautifulSoup('your_html_file.html')
 text = soup.get_text()
 j = open('output.txt','w')
 text = text.encode('ascii', 'ignore').decode('ascii')
