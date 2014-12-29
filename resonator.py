@@ -76,7 +76,7 @@ t_name.attrib['replace-wildcards'] = 'yes'
 t_name._setText('http://192.168.1.113/?total=%s' % a)
 t_service = objectify.SubElement(root, 'service')
 tt_hostname = objectify.SubElement(t_service, 'host-name')
-tt_hostname._setText('http://akamediasystem.com')
+tt_hostname._setText('http://192.168.1.113/')
 tt_type = objectify.SubElement(t_service, 'type')
 tt_type._setText('_http._tcp')
 tt_port = objectify.SubElement(t_service, 'port')
@@ -89,4 +89,6 @@ s = '<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group
 f = open('/etc/avahi/services/resonator-avahi.service', 'w')
 f.write(s)
 f.close()
+
+# here we could also update the <meta> properties of the local website
 
