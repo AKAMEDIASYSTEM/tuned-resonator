@@ -1,0 +1,10 @@
+[Unit]
+Description=AKA tuned-resonator server timer
+
+[Timer]
+OnActiveSec=200
+OnUnitInactiveSec=60
+Unit=resonator-server.service
+
+[Install]
+WantedBy=multi-user.target
