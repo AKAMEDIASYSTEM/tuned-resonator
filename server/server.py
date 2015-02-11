@@ -5,7 +5,7 @@
 import tornado.ioloop
 import tornado.web
 from handlers.BrowserHandler import BrowserHandler
-from handlers.APIHandler import APIHandler
+# from handlers.APIHandler import APIHandler
 
 application = tornado.web.Application([
     (r"/", BrowserHandler),
