@@ -59,13 +59,14 @@ import json
 # print d['feed']['summary']
 
 local_url = '192.168.0.113'
+hostname = 'bender.local'
 
 p = {'method':'brooklyn.integers.create'}
 i = requests.post('http://api.brooklynintegers.com/rest/', params=p)
 j = json.loads(i.content)
 a = j['integers'][0]['integer']
 # hey you see the above four lines? It sucks that I have to do that to get a goddamn API result.
-# and yes, I know it's  joke API
+# and yes, I know it's a joke API
 print a
 
 # create XML 
@@ -76,7 +77,7 @@ t_name.attrib['replace-wildcards'] = 'yes'
 t_name._setText('http://192.168.0.113/?state=%s' % a)
 t_service = objectify.SubElement(root, 'service')
 tt_hostname = objectify.SubElement(t_service, 'host-name')
-tt_hostname._setText('http://192.168.0.113/')
+tt_hostname._setText(hostname)
 tt_type = objectify.SubElement(t_service, 'type')
 tt_type._setText('_http._tcp')
 tt_port = objectify.SubElement(t_service, 'port')
