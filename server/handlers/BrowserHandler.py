@@ -6,9 +6,10 @@ import logging
 import datetime
 import tornado
 import random
+from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
 
-class BrowserHandler(tornado.web.RequestHandler):
+class BrowserHandler(BaseHandler):
     """HTML display of Keywords browsed in the last day"""
 
     def get(self):
