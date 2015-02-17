@@ -59,7 +59,7 @@ with open('tempGrep.txt') as f:
 urls = [i for i in k if isValid(i)]
 
 for url in urls:
-    print url
+    # print url
     try: 
         text = v2.extract(url)
         print text.encode('ascii','ignore')
