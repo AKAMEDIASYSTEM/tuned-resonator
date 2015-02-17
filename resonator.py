@@ -45,6 +45,9 @@ import requests
 import keys
 import feedparser
 import json
+from subprocess import call
+
+call("cat /var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt")
 # example: d = feedparser.parse('http://feedparser.org/docs/examples/atom10.xml')
 # d['feed']['title']
 
@@ -58,18 +61,30 @@ import json
 # d = feedparser.parse(keys.feedurl)
 # print d['feed']['summary']
 
+'''
+02/2015 revisit; this will now attempt to parse logfiles from tinyproxy
+
+copy logfile into local/temp file
+wipe logfile so it can be refilled
+open tempfile
+extract all urls form tempfile
+throw away all urls that end in .[png, svg, gif, jpeg, js, ipa, css] - make this case-insensitive
+'''
+with open('tempGrep.txt') as f:
+    content = f.readlines()
+    for line in content:
+        last = line.split(' ')
+        print last[-3] ## this is the URL tinyproxy reports
+
+
+
 local_url = '192.168.0.113'
 hostname = 'bender.local'
 
-p = {'method':'brooklyn.integers.create'}
-i = requests.post('http://api.brooklynintegers.com/rest/', params=p)
-j = json.loads(i.content)
-a = j['integers'][0]['integer']
-# hey you see the above four lines? It sucks that I have to do that to get a goddamn API result.
-# and yes, I know it's a joke API
-print a
-
-# create XML 
+# create XML to update the resonator.service file
+# this should update the .service file with recent data but idk what yet
+# maybe last three topics or something?
+'''
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
@@ -90,6 +105,6 @@ s = '<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group
 f = open('/etc/avahi/services/resonator-avahi.service', 'w')
 f.write(s)
 f.close()
-
+'''
 # here we could also update the <meta> properties of the local website
 
