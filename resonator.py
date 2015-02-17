@@ -53,6 +53,8 @@ hostname = 'bender.local'
 
 call(["cat", "/var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt"])
 
+nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg']
+
 # example: d = feedparser.parse('http://feedparser.org/docs/examples/atom10.xml')
 # d['feed']['title']
 
