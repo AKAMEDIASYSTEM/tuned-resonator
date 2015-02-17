@@ -74,7 +74,10 @@ throw away all urls that end in .[png, svg, gif, jpeg, js, ipa, css] - make this
 with open('tempGrep.txt') as f:
     content = f.readlines()
     k = [line.split(' ')[-3] for line in content]
-    print k
+    # print k
+
+for i in k:
+    print i
 
 # with open('tempGrep.txt') as f:
     # content = f.readlines()
