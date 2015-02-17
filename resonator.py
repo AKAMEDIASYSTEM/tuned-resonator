@@ -75,13 +75,26 @@ open tempfile
 extract all urls form tempfile
 throw away all urls that end in .[png, svg, gif, jpeg, js, ipa, css] - make this case-insensitive
 '''
+
+def isValid(line_in):
+    # check for jpeg, jpg, gif, js, etc
+    # return True if it's a valid url
+    for suffix in nixList:
+        if line_in.split('.')[-1]==suffix:
+            return False
+    # check for localhost pages
+    if localhost in line_in:
+        return False
+    return True
+
 with open('tempGrep.txt') as f:
     content = f.readlines()
     k = [line.split(' ')[-3] for line in content]
     # print k
 
 # k = [i for i in k if i.split('.')[-1]=='jpg'] # all jpgs
-k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png' and i.split('.')[-1]!='js' and i.split('.')[-1]!='ico' and localhost not in i]
+# k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png' and i.split('.')[-1]!='js' and i.split('.')[-1]!='ico' and localhost not in i]
+k = [i for i in k if isValid(i)]
 for l in k:
     print l
 
