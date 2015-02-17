@@ -48,8 +48,8 @@ import json
 from subprocess import call
 import os
 # call("touch tempGrep.txt")
-# call("cat", "/var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt")
-os.system("cat /var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt")
+call(["cat", "/var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt"])
+# os.system("cat /var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt")
 # example: d = feedparser.parse('http://feedparser.org/docs/examples/atom10.xml')
 # d['feed']['title']
 
