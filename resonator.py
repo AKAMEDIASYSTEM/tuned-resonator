@@ -93,6 +93,8 @@ def isValid(line_in):
     # check for localhost pages
     if localhost in line_in:
         return False
+    if 'Host'==line_in:
+        return False
     return True
 
 with open('tempGrep.txt') as f:
