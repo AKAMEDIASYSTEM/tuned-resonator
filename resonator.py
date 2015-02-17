@@ -63,9 +63,10 @@ for url in urls:
     try: 
         text = v2.extract(url)
         print text.encode('ascii','ignore')
+        print '\n\n\n\n'
     except:
         pass
-    print '\n\n\n\n'
+    
 
 
 
