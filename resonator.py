@@ -60,8 +60,11 @@ urls = [i for i in k if isValid(i)]
 
 for url in urls:
     print url
-    text = v2.extract(url)
-    print text.encode('ascii','ignore')
+    try: 
+        text = v2.extract(url)
+        print text.encode('ascii','ignore')
+    except:
+        pass
     print '\n\n\n\n'
 
 
