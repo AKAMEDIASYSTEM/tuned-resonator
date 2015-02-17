@@ -46,6 +46,7 @@ import requests
 # import feedparser
 import json
 from subprocess import call
+import os
 # call("touch tempGrep.txt")
 # call("cat", "/var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt")
 os.system("cat /var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt")
