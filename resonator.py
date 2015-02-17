@@ -42,7 +42,7 @@ If people are stuck on older versions, please let us know (or feel free add it y
 from lxml import etree
 from lxml import objectify
 import requests
-import keys
+# import keys
 import feedparser
 import json
 from subprocess import call
