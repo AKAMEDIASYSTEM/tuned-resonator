@@ -46,10 +46,9 @@ import requests
 # import feedparser
 import json
 from subprocess import call
-import os
-# call("touch tempGrep.txt")
+
 call(["cat", "/var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt"])
-# os.system("cat /var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt")
+
 # example: d = feedparser.parse('http://feedparser.org/docs/examples/atom10.xml')
 # d['feed']['title']
 
@@ -74,10 +73,14 @@ throw away all urls that end in .[png, svg, gif, jpeg, js, ipa, css] - make this
 '''
 with open('tempGrep.txt') as f:
     content = f.readlines()
-    for line in content:
-        last = line.split(' ')
-        print last[-3] ## this is the URL tinyproxy reports
+    k = [line.split(' ')[-3] for line in content]
+    print k
 
+# with open('tempGrep.txt') as f:
+    # content = f.readlines()
+    # for line in content:
+    #     last = line.split(' ')
+    #     print last[-3] ## this is the URL tinyproxy reports
 
 
 local_url = '192.168.0.113'
