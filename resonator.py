@@ -47,6 +47,10 @@ import requests
 import json
 from subprocess import call
 
+localhost = '192.168.1.1'
+local_url = '192.168.0.113'
+hostname = 'bender.local'
+
 call(["cat", "/var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt"])
 
 # example: d = feedparser.parse('http://feedparser.org/docs/examples/atom10.xml')
@@ -77,7 +81,7 @@ with open('tempGrep.txt') as f:
     # print k
 
 # k = [i for i in k if i.split('.')[-1]=='jpg'] # all jpgs
-k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png']
+k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png' and localhost not in i]
 for l in k:
     print l
 
@@ -87,9 +91,6 @@ for l in k:
     #     last = line.split(' ')
     #     print last[-3] ## this is the URL tinyproxy reports
 
-
-local_url = '192.168.0.113'
-hostname = 'bender.local'
 
 # create XML to update the resonator.service file
 # this should update the .service file with recent data but idk what yet
