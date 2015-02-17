@@ -52,9 +52,9 @@ local_url = '192.168.0.113'
 hostname = 'bender.local'
 # dump log to temp file (should also wipe log at this point to avoid overflow?)
 call(["cat", "/var/log/remote_aka.log | grep 'trans Host GET' > tempGrep.txt"])
-call(["echo", "777 > /var/log/remote_aka.log"])
+# call(["echo", "777 > /var/log/remote_aka.log"]) # deprecate this for now while testing
 
-nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg']
+nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json']
 
 # example: d = feedparser.parse('http://feedparser.org/docs/examples/atom10.xml')
 # d['feed']['title']
@@ -85,6 +85,11 @@ def isValid(line_in):
     for suffix in nixList:
         if line_in.split('.')[-1]==suffix:
             return False
+    if '?' in line_in:
+        for suffix in nixList:
+            line_in = line_in.split('?')[0]
+            if line_in.split('.')[-1]==suffix:
+                return False
     # check for localhost pages
     if localhost in line_in:
         return False
