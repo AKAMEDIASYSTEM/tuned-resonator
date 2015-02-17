@@ -59,7 +59,7 @@ urls = [i for i in k if isValid(i)]
 
 for url in urls:
     text = v2.extract(url)
-    print text
+    print text.encode('ascii','ignore')
     print '\n\n\n\n'
 
 
