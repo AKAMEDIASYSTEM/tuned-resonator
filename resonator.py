@@ -43,7 +43,7 @@ from lxml import etree
 from lxml import objectify
 import requests
 # import keys
-import feedparser
+# import feedparser
 import json
 from subprocess import call
 
