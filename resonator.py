@@ -76,7 +76,8 @@ with open('tempGrep.txt') as f:
     k = [line.split(' ')[-3] for line in content]
     # print k
 
-k = [i for i in k if i.split('.')[-1]=='jpg']
+# k = [i for i in k if i.split('.')[-1]=='jpg'] # all jpgs
+k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png']
 for l in k:
     print l
 
