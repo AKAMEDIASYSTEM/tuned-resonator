@@ -81,7 +81,7 @@ with open('tempGrep.txt') as f:
     # print k
 
 # k = [i for i in k if i.split('.')[-1]=='jpg'] # all jpgs
-k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png' and localhost not in i]
+k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png' and i.split('.')[-1]!='js' and i.split('.')[-1]!='ico' and localhost not in i]
 for l in k:
     print l
 
