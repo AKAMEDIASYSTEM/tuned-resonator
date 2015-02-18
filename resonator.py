@@ -51,10 +51,10 @@ def isValid(line_in):
 
 print 'processing /var/log/remote_aka.log'
 
-os.system(" cat /var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resonator/tempGrep.txt")
+print os.system("cat /var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resonator/tempGrep.txt")
 print 'done processing /var/log/remote_aka.log into tempGrep.txt'
 
-os.system('echo > /var/log/remote_aka.log')
+print os.system('echo > /var/log/remote_aka.log')
 print 'wiped /var/log/remote_aka.log so now do not lose tempGrep.txt'
 
 with open('tempGrep.txt') as f:
