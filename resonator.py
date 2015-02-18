@@ -21,6 +21,7 @@ import json
 from subprocess import call
 import eatiht.v2 as v2
 import os
+from urlparse import urlparse as parse
 
 localhost = '192.168.1.1'
 local_url = '192.168.0.113'
@@ -32,8 +33,10 @@ os.system(" cat /var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resona
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2']
 
 def isValid(line_in):
+    # TODO: update this to split more smartly with urlparse?
     # check for jpeg, jpg, gif, js, etc
     # return True if it's a valid url
+    '''
     for suffix in nixList:
         if line_in.split('.')[-1]==suffix:
             return False
@@ -48,6 +51,19 @@ def isValid(line_in):
     if 'Host'==line_in:
         return False
     return True
+    '''
+    if 'Host'==line_in:
+        return False
+    try:
+        p = parse(line_in)
+        for n in nixList:
+            if p.path.endswith(n):
+                return False
+            if localhost in p.netloc:
+                return False
+        return True
+    except:
+        return False
 
 with open('tempGrep.txt') as f:
     content = f.readlines()
