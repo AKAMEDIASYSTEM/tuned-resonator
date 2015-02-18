@@ -26,32 +26,11 @@ from urlparse import urlparse as parse
 localhost = '192.168.1.1'
 local_url = '192.168.0.113'
 hostname = 'bender.local'
-# dump log to temp file (should also wipe log at this point to avoid overflow?)
-# call(['cat', "/var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resonator/tempGrep.txt"])
-# call(["echo", "777 > /var/log/remote_aka.log"]) # deprecate this for now while testing
-os.system(" cat /var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resonator/tempGrep.txt")
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf']
 
 def isValid(line_in):
-    # TODO: update this to split more smartly with urlparse?
     # check for jpeg, jpg, gif, js, etc
     # return True if it's a valid url
-    '''
-    for suffix in nixList:
-        if line_in.split('.')[-1]==suffix:
-            return False
-    if '?' in line_in:
-        for suffix in nixList:
-            line_in = line_in.split('?')[0]
-            if line_in.split('.')[-1]==suffix:
-                return False
-    # check for localhost pages
-    if localhost in line_in:
-        return False
-    if 'Host'==line_in:
-        return False
-    return True
-    '''
     if 'Host'==line_in:
         return False
     try:
@@ -65,13 +44,26 @@ def isValid(line_in):
     except:
         return False
 
+# dump log to temp file (should also wipe log at this point to avoid overflow?)
+# call(['cat', "/var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resonator/tempGrep.txt"])
+# call(["echo", "777 > /var/log/remote_aka.log"]) # deprecate this for now while testing
+
+print 'processing /var/log/remote_aka.log'
+
+os.system(" cat /var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resonator/tempGrep.txt")
+
+print 'done processing /var/log/remote_aka.log into tempGrep.txt'
+
+
+
 with open('tempGrep.txt') as f:
     content = f.readlines()
+    # urls are reliably 3rd from last thing in line
+    # here's a sample log line
+    # Feb 18 11:50:27 tuned-resonator.local tinyproxy[12452]: process_request: trans Host GET http://www.tutorialspoint.com:80/favicon.ico for 1
     k = [line.split(' ')[-3] for line in content]
     # print k
 
-# k = [i for i in k if i.split('.')[-1]=='jpg'] # all jpgs
-# k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png' and i.split('.')[-1]!='js' and i.split('.')[-1]!='ico' and localhost not in i]
 urls = [i for i in k if isValid(i)]
 # TODO be smart and remove duplicate URLS here!!
 urls = [u for u in set(urls)]
