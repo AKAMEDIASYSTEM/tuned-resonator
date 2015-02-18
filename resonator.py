@@ -69,13 +69,13 @@ urls = [i for i in k if isValid(i)]
 # TODO be smart and remove duplicate URLS here!!
 urls = [u for u in set(urls)]
 
-url_out = open('test_urls.txt',w)
+url_out = open('test_urls.txt','w')
 for url in urls:
     url_out.write(url)
     url_out.write('\n')
 url_out.close()
 
-output = open('test_output.txt',w)
+output = open('test_output.txt','w')
 for url in urls:
     # print url
     try: 
