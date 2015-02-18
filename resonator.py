@@ -73,10 +73,13 @@ for url in urls:
     # print url
     try: 
         text = v2.extract(url)
-        print text.encode('ascii','ignore')
+        output = open('test_output.txt',w)
+        f.write(text.encode('ascii','ignore'))
+        f.write('\n')
         # print '\n\n\n\n'
     except:
         pass
+    f.close()
     
 
 
