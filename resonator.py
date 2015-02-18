@@ -46,7 +46,8 @@ def isValid(line_in):
 
 # dump log to temp file (should also wipe log at this point to avoid overflow?)
 # call(['cat', "/var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resonator/tempGrep.txt"])
-# call(["echo", "777 > /var/log/remote_aka.log"]) # deprecate this for now while testing
+# deprecate this for now while testing
+# os.system('echo > /var/log/remote_aka.log')
 
 print 'processing /var/log/remote_aka.log'
 
@@ -72,7 +73,7 @@ for url in urls:
     # print url
     try: 
         text = v2.extract(url)
-        # print text.encode('ascii','ignore')
+        print text.encode('ascii','ignore')
         # print '\n\n\n\n'
     except:
         pass
