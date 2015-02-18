@@ -69,17 +69,23 @@ urls = [i for i in k if isValid(i)]
 # TODO be smart and remove duplicate URLS here!!
 urls = [u for u in set(urls)]
 
+url_out = open('test_urls.txt',w)
+for url in urls:
+    url_out.write(url)
+    url_out.write('\n')
+url_out.close()
+
+output = open('test_output.txt',w)
 for url in urls:
     # print url
     try: 
         text = v2.extract(url)
-        output = open('test_output.txt',w)
-        f.write(text.encode('ascii','ignore'))
-        f.write('\n')
+        output.write(text.encode('ascii','ignore'))
+        output.write('\n')
         # print '\n\n\n\n'
     except:
         pass
-    f.close()
+output.close()    
     
 
 
