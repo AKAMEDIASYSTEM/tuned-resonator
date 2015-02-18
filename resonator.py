@@ -30,7 +30,7 @@ hostname = 'bender.local'
 # call(['cat', "/var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resonator/tempGrep.txt"])
 # call(["echo", "777 > /var/log/remote_aka.log"]) # deprecate this for now while testing
 os.system(" cat /var/log/remote_aka.log | grep 'trans Host GET' > ~/tuned-resonator/tempGrep.txt")
-nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2']
+nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf']
 
 def isValid(line_in):
     # TODO: update this to split more smartly with urlparse?
@@ -73,13 +73,14 @@ with open('tempGrep.txt') as f:
 # k = [i for i in k if i.split('.')[-1]=='jpg'] # all jpgs
 # k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png' and i.split('.')[-1]!='js' and i.split('.')[-1]!='ico' and localhost not in i]
 urls = [i for i in k if isValid(i)]
+# TODO be smart and remove duplicate URLS here!!
 
 for url in urls:
     # print url
     try: 
         text = v2.extract(url)
-        print text.encode('ascii','ignore')
-        print '\n\n\n\n'
+        # print text.encode('ascii','ignore')
+        # print '\n\n\n\n'
     except:
         pass
     
