@@ -74,6 +74,7 @@ with open('tempGrep.txt') as f:
 # k = [i for i in k if i.split('.')[-1]!='jpg' and i.split('.')[-1]!='png' and i.split('.')[-1]!='js' and i.split('.')[-1]!='ico' and localhost not in i]
 urls = [i for i in k if isValid(i)]
 # TODO be smart and remove duplicate URLS here!!
+urls = [u for u in set(urls)]
 
 for url in urls:
     # print url
