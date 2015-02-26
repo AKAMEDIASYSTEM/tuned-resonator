@@ -55,7 +55,7 @@ def isValid(line_in):
 
 print 'processing /var/log/remote_aka.log'
 
-print os.system("cat /var/log/remote_aka.log | grep 'trans Host GET' > ~/root/tuned-resonator/tempGrep.txt")
+print os.system("cat /var/log/remote_aka.log | grep 'trans Host GET' > /root/tuned-resonator/tempGrep.txt")
 print 'done processing /var/log/remote_aka.log into tempGrep.txt'
 
 print os.system('echo > /var/log/remote_aka.log')
