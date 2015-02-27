@@ -62,15 +62,13 @@ print os.system('echo > /var/log/remote_aka.log')
 print 'wiped /var/log/remote_aka.log so now do not lose tempGrep.txt'
 
 with open('tempGrep.txt') as f:
-    # content = f.readlines()
     # urls are reliably 3rd from last thing in line
     # here's a sample log line
     # Feb 18 11:50:27 tuned-resonator.local tinyproxy[12452]: process_request: trans Host GET http://www.tutorialspoint.com:80/favicon.ico for 1
     k = [line.split(' ')[-3] for line in f]
-    # print k
 
 urls = [i for i in k if isValid(i)]
-# TODO be smart and remove duplicate URLS here!!
+# remove duplicate URLS
 urls = [u for u in set(urls)]
 
 url_out = open('test_urls.txt','w')
