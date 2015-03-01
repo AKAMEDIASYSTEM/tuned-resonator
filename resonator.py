@@ -21,6 +21,7 @@ import json
 from subprocess import call
 import eatiht.v2 as v2
 import os
+import time
 from urlparse import urlparse as parse
 import nltk
 from nltk.corpus import brown
@@ -87,5 +88,6 @@ for url in urls:
         # print '\n\n\n\n'
     except:
         pass
-output.close()    
+output.close()
+print 'finished running at ', time.strftime("%a, %d %b %Y %H:%M:%S")
 
