@@ -30,8 +30,8 @@ localhost = '192.168.1.1'
 local_url = '192.168.0.113'
 hostname = 'bender.local'
 # don't make fun, this was just waaaaay quicker than making this really case-insensitive
-nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp',
-'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP']
+nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
+'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
 
 def isValid(line_in):
     # check for jpeg, jpg, gif, js, etc
