@@ -3,7 +3,7 @@ Description=AKA tuned-resonator timer
 
 [Timer]
 OnActiveSec=200
-OnUnitInactiveSec=60
+OnUnitInactiveSec=600
 Unit=resonator.service
 
 [Install]
