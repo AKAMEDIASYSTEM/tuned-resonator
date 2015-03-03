@@ -12,6 +12,34 @@ extract all urls form tempfile
 throw away all urls that end in .[png, svg, gif, jpeg, js, ipa, css] - make this case-insensitive
 '''
 
+'''
+sigh, better strategy:
+tail the logfile from within python http://stackoverflow.com/questions/12523044/how-can-i-tail-a-log-file-in-python
+for each incoming line from tail, test to see if it contains actionable URL (same grep pattern, maybe, as we use now)
+
+tail -f /var/log/remote_aka.log | grep 'trans Host GET' | xargs curl localhost:8080 -d'{}'
+
+tail the logfile (or use https://gist.github.com/marcelom/4218010 to skip syslog and have python accept UDP log messages)
+
+for each incoming message, filter out messages without actionable URLs 
+
+for each actionable URL, send just the URL to a queue, perhaps bitly simplehttp https://github.com/bitly/simplehttp or beanstalk
+
+SEPARATELY, python workers are spawned to handle stuff on the queue.
+
+Each worker gets a URL.
+Using pattern.web, we resolve the URL and if it's mimetype FOO (e.g., text/html and text/plaintext) we do patter.web.plaintext()
+THEN: results of pattern.web.plaintext go into redis with appropriate TTL?
+OR: results of plaintext get chunked+parsed and noun phrases go into redis, with appropriate TTL
+
+SEPARATELY STILL,
+a tornado server lives on the subnet and serves out noun phrases in a manner similar to current curriculum (ie, query for X phrases from up to Y seconds ago)
+
+
+
+
+'''
+
 from lxml import etree
 from lxml import objectify
 import requests
@@ -24,7 +52,8 @@ import os
 import time
 from urlparse import urlparse as parse
 import nltk
-from nltk.corpus import brown
+# from nltk.corpus import brown
+import pattern.web
 
 localhost = '192.168.1.1'
 local_url = '192.168.0.113'
@@ -72,12 +101,14 @@ urls = [i for i in k if isValid(i)]
 # remove duplicate URLS
 urls = [u for u in set(urls)]
 
+# this is just for debug; export all urls so you can check for junk
 url_out = open('test_urls.txt','w')
 for url in urls:
     url_out.write(url)
     url_out.write('\n')
 url_out.close()
 
+# dump output of all pages to file (should I shove these in a db?)
 output = open('test_output.txt','w')
 for url in urls:
     # print url
