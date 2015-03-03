@@ -14,6 +14,8 @@ throw away all urls that end in .[png, svg, gif, jpeg, js, ipa, css] - make this
 
 '''
 sigh, better strategy:
+
+A systemd recurring/respawning service does the following 'tail' operation:
 tail the logfile from within python http://stackoverflow.com/questions/12523044/how-can-i-tail-a-log-file-in-python
 for each incoming line from tail, test to see if it contains actionable URL (same grep pattern, maybe, as we use now)
 
