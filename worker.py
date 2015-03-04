@@ -24,7 +24,9 @@ while beanstalk.peek_ready():
             print s
             c = c+1
             print c
-    except:
+    except URLTimeout:
         print 'timeout on ', url
+    except:
+        print 'non-timeout problem'
     output.close()
     job.delete()
