@@ -19,12 +19,14 @@ while beanstalk.peek_ready():
         s = url.download(cache=True,timeout=100)
         the_type = url.mimetype
         print the_type
-        if url.mimetype==MIMETYPE_WEBPAGE or url.mimetype==MIMETYPE_PLAINTEXT:
+        if the_type==MIMETYPE_WEBPAGE or the_type==MIMETYPE_PLAINTEXT:
             s = plaintext(s)
             output.write(s.encode('ascii','ignore'))
             print s
             c = c+1
             print c
+        else:
+            'we failed the mimetype test again wtf'
     # except URLError, e:
     except:
         e = sys.exc_info()[0]
