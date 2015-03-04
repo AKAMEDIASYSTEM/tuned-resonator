@@ -18,12 +18,13 @@ while beanstalk.peek_ready():
 
     try:
         # s = url.download(timeout=2500)
-        s = url.download(user_agent='Mozilla/5.0')
+        # s = url.download(user_agent='Mozilla/5.0')
+        s = url.download()
         # the_type = url.mimetype
         print url.mimetype
         if (url.mimetype in MIMETYPE_WEBPAGE) or (url.mimetype in MIMETYPE_PLAINTEXT):
             s = plaintext(s)
-            print output.write(s.encode('ascii','ignore'))
+            output.write(s.encode('ascii','ignore'))
             # print s.encode('ascii','ignore')
             c = c+1
             print c
