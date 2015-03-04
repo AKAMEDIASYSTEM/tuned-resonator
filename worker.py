@@ -16,7 +16,7 @@ while beanstalk.peek_ready():
     url = URL(job.body)
     try:
         # s = url.download(timeout=2500)
-        s = url.download(cache=False,timeout=100)
+        s = url.download()
         # the_type = url.mimetype
         print the_type
         if (url.mimetype in MIMETYPE_WEBPAGE) or (url.mimetype in MIMETYPE_PLAINTEXT):
