@@ -45,9 +45,9 @@ class SyslogUDPHandler(SocketServer.BaseRequestHandler):
         socket = self.request[1]
         if 'trans Host GET' in str(data):
             url = str(data).split(' ')[-3]
-            print(url)
             if isValid(url):
                 beanstalk.put(url)
+                print(url)
             else:
                 pass
         # logging.info(str(data))
