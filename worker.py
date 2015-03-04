@@ -3,7 +3,7 @@
 # AKA resonator local curriculum resolver/worker
 
 import beanstalkc
-from pattern.web import URL, plaintext
+from pattern.web import URL, plaintext, URLError
 from urlparse import urlparse as parse
 
 
@@ -24,9 +24,8 @@ while beanstalk.peek_ready():
             print s
             c = c+1
             print c
-    except URLTimeout:
-        print 'timeout on ', url
-    except:
-        print 'non-timeout problem'
+    except URLError:
+        print 'URLError on ', url
+        print URLError
     output.close()
     job.delete()
