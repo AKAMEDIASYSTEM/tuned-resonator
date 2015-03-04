@@ -26,7 +26,7 @@ def isValid(line_in):
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 while beanstalk.peek_ready():
     job = beanstalk.reserve()
-    print job.body
+    # print job.body
     # output = open('test_output_redis.txt','w')
     url = URL(job.body)
     if(isValid(job.body)):
@@ -41,5 +41,7 @@ while beanstalk.peek_ready():
                 print c
         except:
             print 'timeout on ', url
+    else:
+        print '%s failed mimetype check' % url
     # output.close()
     job.delete()
