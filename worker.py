@@ -43,5 +43,8 @@ while beanstalk.peek_ready():
                 print c
         except:
             print 'timeout on ', url
+    else:
+        print 'failed validity test:'
+        print job.body
     # output.close()
     job.delete()
