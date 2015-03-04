@@ -3,7 +3,7 @@
 # AKA resonator local curriculum resolver/worker
 
 import beanstalkc
-from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT
+from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT, HTTPError
 from urlparse import urlparse as parse
 import sys
 
@@ -28,7 +28,7 @@ while beanstalk.peek_ready():
         else:
             'we failed the mimetype test again wtf'
     # except URLError, e:
-    except:
+    except HTTPError:
         e = sys.exc_info()[0]
         # print 'URLError on ', url
         print e
