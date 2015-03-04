@@ -29,6 +29,7 @@ while beanstalk.peek_ready():
     # print job.body
     # output = open('test_output_redis.txt','w')
     url = URL(job.body)
+    print url
     if(isValid(job.body)):
         try:
             s = url.download(timeout=2500)
@@ -41,7 +42,5 @@ while beanstalk.peek_ready():
                 print c
         except:
             print 'timeout on ', url
-    else:
-        print '%s failed mimetype check' % url
     # output.close()
     job.delete()
