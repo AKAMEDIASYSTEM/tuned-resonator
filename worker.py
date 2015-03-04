@@ -24,8 +24,8 @@ while beanstalk.peek_ready():
             print s
             c = c+1
             print c
-    except URLError:
+    except URLError, e:
         print 'URLError on ', url
-        print URLError
+        print e
     output.close()
     job.delete()
