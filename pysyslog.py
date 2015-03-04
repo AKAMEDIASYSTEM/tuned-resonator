@@ -17,7 +17,7 @@ from urlparse import urlparse as parse
 
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
 'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
-localhost = '192.168.1.1'
+local_host = '192.168.1.1'
 def isValid(line_in):
     # check for jpeg, jpg, gif, js, etc
     # return True if it's a valid url
@@ -28,7 +28,7 @@ def isValid(line_in):
         for n in nixList:
             if p.path.endswith(n):
                 return False
-            if localhost in p.netloc:
+            if local_host in p.netloc:
                 return False
         return True
     except:
