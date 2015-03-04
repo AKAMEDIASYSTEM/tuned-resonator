@@ -31,11 +31,11 @@ while beanstalk.peek_ready():
     # output = open('test_output_redis.txt','w')
     # url = URL(job.body)
     # print url
-    # if(isValid(job.body)):
-    if True:
+    if(isValid(job.body)):
         url = URL(job.body)
         try:
-            s = url.download(timeout=2500)
+            # s = url.download(timeout=2500)
+            s = url.download()
             the_type = url.mimetype
             print the_type
             if 'text/html'==the_type:
