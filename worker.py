@@ -3,7 +3,7 @@
 # AKA resonator local curriculum resolver/worker
 
 import beanstalkc
-from pattern.web import URL, plaintext, URLError
+from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT
 from urlparse import urlparse as parse
 
 
@@ -18,7 +18,7 @@ while beanstalk.peek_ready():
         s = url.download()
         the_type = url.mimetype
         print the_type
-        if url.mimetype==URL.MIMETYPE_WEBPAGE or url.mimetype==URL.MIMETYPE_PLAINTEXT:
+        if url.mimetype==MIMETYPE_WEBPAGE or url.mimetype==MIMETYPE_PLAINTEXT:
             s = plaintext(s)
             output.write(s.encode('ascii','ignore'))
             print s
