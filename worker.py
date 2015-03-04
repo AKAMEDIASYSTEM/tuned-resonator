@@ -5,6 +5,7 @@
 import beanstalkc
 from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT
 from urlparse import urlparse as parse
+import sys
 
 
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
