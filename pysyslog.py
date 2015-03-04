@@ -25,7 +25,8 @@ class SyslogUDPHandler(SocketServer.BaseRequestHandler):
         data = bytes.decode(self.request[0].strip())
         socket = self.request[1]
         if 'trans Host GET' in str(data):
-            print( "%s : " % self.client_address[0], str(data))
+            url = str(data).split(' ')[-3]
+            print(url)
         # logging.info(str(data))
  
 if __name__ == "__main__":
