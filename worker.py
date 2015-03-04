@@ -4,6 +4,7 @@
 
 import beanstalkc
 from pattern.web import URL, plaintext
+from urlparse import urlparse as parse
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
 'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
 localhost = '192.168.1.1'
