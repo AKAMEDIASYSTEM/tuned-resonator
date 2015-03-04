@@ -22,21 +22,22 @@ def isValid(line_in):
         return False
 
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
-job = beanstalk.reserve()
-print job.body
-# output = open('test_output_redis.txt','w')
-url = URL(job.body)
-if(isValid(job.body)):
-    try:
-        s = url.download(timeout=2500)
-        the_type = url.mimetype
-        if 'text/html'==the_type:
-            s = plaintext(s)
-            # output.write(s.encode('ascii','ignore'))
-            print s
-            c = c+1
-            print c
-    except:
-        print 'timeout on ', url
-# output.close()
-job.delete()
+while beanstalk.peek_ready():
+	job = beanstalk.reserve()
+	print job.body
+	# output = open('test_output_redis.txt','w')
+	url = URL(job.body)
+	if(isValid(job.body)):
+	    try:
+	        s = url.download(timeout=2500)
+	        the_type = url.mimetype
+	        if 'text/html'==the_type:
+	            s = plaintext(s)
+	            # output.write(s.encode('ascii','ignore'))
+	            print s
+	            c = c+1
+	            print c
+	    except:
+	        print 'timeout on ', url
+	# output.close()
+	job.delete()
