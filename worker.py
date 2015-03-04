@@ -34,6 +34,7 @@ while beanstalk.peek_ready():
         try:
             s = url.download(timeout=2500)
             the_type = url.mimetype
+            print the_type
             if 'text/html'==the_type:
                 s = plaintext(s)
                 # output.write(s.encode('ascii','ignore'))
