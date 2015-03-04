@@ -28,8 +28,8 @@ while beanstalk.peek_ready():
         else:
             'we failed the mimetype test again wtf'
     # except URLError, e:
-    except HTTPError:
-        e = sys.exc_info()[0]
+    except HTTPError, e:
+        # e = sys.exc_info()[0]
         # print 'URLError on ', url
         print e
     output.close()
