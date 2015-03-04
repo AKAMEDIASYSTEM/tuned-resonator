@@ -7,6 +7,7 @@ from pattern.web import URL, plaintext
 
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 job = beanstalk.reserve()
+print job
 # output = open('test_output_redis.txt','w')
 url = URL(job.body)
 print 'url is ',url
