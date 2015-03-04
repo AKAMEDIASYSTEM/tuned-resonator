@@ -11,7 +11,7 @@ job = beanstalk.reserve()
 url = URL(job.body)
 print 'url is ',url
 try:
-    s = url.download(timeout=25)
+    s = url.download(timeout=2500)
     the_type = url.mimetype
     if 'text/html'==the_type:
         s = plaintext(s)
