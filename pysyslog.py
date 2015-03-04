@@ -9,27 +9,30 @@
  
 LOG_FILE = 'remote_aka.log'
 HOST, PORT = "192.168.1.2", 514
- 
-#
-# NO USER SERVICEABLE PARTS BELOW HERE...
-#
+ # don't make fun, this was just waaaaay quicker than making this really case-insensitive
+nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
+'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
  
 # import logging
 import SocketServer
+import beanstalkc
+ from urlparse import urlparse as parse
  
 # logging.basicConfig(level=logging.INFO, format='%(message)s', datefmt='', filename=LOG_FILE, filemode='a')
  
 class SyslogUDPHandler(SocketServer.BaseRequestHandler):
- 
+
     def handle(self):
         data = bytes.decode(self.request[0].strip())
         socket = self.request[1]
         if 'trans Host GET' in str(data):
             url = str(data).split(' ')[-3]
             print(url)
+            beanstalk.put(url)
         # logging.info(str(data))
  
 if __name__ == "__main__":
+    beanstalk = beanstalkc.Connection(host='localhost', port=14711)
     try:
         server = SocketServer.UDPServer((HOST,PORT), SyslogUDPHandler)
         server.serve_forever(poll_interval=0.5)
