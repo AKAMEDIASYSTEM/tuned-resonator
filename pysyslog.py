@@ -16,8 +16,8 @@ nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','js
 # import logging
 import SocketServer
 import beanstalkc
- from urlparse import urlparse as parse
- 
+from urlparse import urlparse as parse
+
 # logging.basicConfig(level=logging.INFO, format='%(message)s', datefmt='', filename=LOG_FILE, filemode='a')
  
 class SyslogUDPHandler(SocketServer.BaseRequestHandler):
