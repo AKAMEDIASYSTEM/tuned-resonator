@@ -23,6 +23,8 @@ def isValid(line_in):
     # return True if it's a valid url
     if 'Host'==line_in:
         return False
+    if 'gravatar.com' in line_in: # this domain is just nasty, all infinite redirects and fury, signifying nothing
+        return False
     try:
         p = parse(line_in)
         for n in nixList:
