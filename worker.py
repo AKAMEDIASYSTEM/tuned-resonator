@@ -4,7 +4,9 @@
 
 import beanstalkc
 from pattern.web import URL, plaintext
-
+nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
+'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
+localhost = '192.168.1.1'
 def isValid(line_in):
     # check for jpeg, jpg, gif, js, etc
     # return True if it's a valid url
