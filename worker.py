@@ -24,7 +24,9 @@ while beanstalk.peek_ready():
             print s
             c = c+1
             print c
-    except URLError, e:
+    # except URLError, e:
+    except:
+        e = sys.exc_info()[0]
         # print 'URLError on ', url
         print e
     output.close()
