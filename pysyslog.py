@@ -14,10 +14,13 @@ HOST, PORT = "192.168.1.2", 514
 import SocketServer
 import beanstalkc
 from urlparse import urlparse as parse
+from collections import Counter
 
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
 'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
 local_host = '192.168.1.1'
+cnt = Counter()
+
 def isValid(line_in):
     # check for jpeg, jpg, gif, js, etc
     # return True if it's a valid url
@@ -32,6 +35,9 @@ def isValid(line_in):
                 return False
             if 'gravatar.com' in p.netloc: # this domain is just nasty, all infinite redirects and fury, signifying nothing
                 return False
+        cnt[line_in] += 1
+        if cnt[line_in] >1:
+            return False
         return True
     except:
         return False
