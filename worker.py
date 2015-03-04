@@ -14,6 +14,7 @@ while beanstalk.peek_ready():
     output = open('test_output_redis.txt','w')
     # print url
     url = URL(job.body)
+    c=0
     try:
         # s = url.download(timeout=2500)
         s = url.download(user_agent='Mozilla/5.0')
@@ -22,7 +23,7 @@ while beanstalk.peek_ready():
         if (url.mimetype in MIMETYPE_WEBPAGE) or (url.mimetype in MIMETYPE_PLAINTEXT):
             s = plaintext(s)
             output.write(s.encode('ascii','ignore'))
-            print s
+            print s.encode('ascii','ignore')
             c = c+1
             print c
         else:
