@@ -20,8 +20,7 @@ while beanstalk.peek_ready():
         s = url.download(cache=True,timeout=100)
         # the_type = url.mimetype
         print the_type
-
-        if url.mimetype==MIMETYPE_WEBPAGE or url.mimetype==MIMETYPE_PLAINTEXT:
+        if (url.mimetype in MIMETYPE_WEBPAGE) or (url.mimetype in MIMETYPE_PLAINTEXT):
             s = plaintext(s)
             output.write(s.encode('ascii','ignore'))
             print s
