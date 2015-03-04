@@ -36,5 +36,6 @@ while beanstalk.peek_ready():
         # print 'URLError on ', url
         print e
         output.close()
-    output.close()
+    
     job.delete()
+output.close()
