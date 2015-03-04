@@ -9,12 +9,13 @@ import sys
 
 
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
+c=0
 while beanstalk.peek_ready():
     job = beanstalk.reserve()
     output = open('test_output_redis.txt','w')
     # print url
     url = URL(job.body)
-    c=0
+
     try:
         # s = url.download(timeout=2500)
         s = url.download(user_agent='Mozilla/5.0')
