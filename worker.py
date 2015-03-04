@@ -22,8 +22,8 @@ while beanstalk.peek_ready():
         # the_type = url.mimetype
         print url.mimetype
         if (url.mimetype in MIMETYPE_WEBPAGE) or (url.mimetype in MIMETYPE_PLAINTEXT):
-            # s = plaintext(s)
-            output.write(plaintext(s).encode('ascii','ignore'))
+            s = plaintext(s)
+            output.write(s.encode('ascii','ignore'))
             # print s.encode('ascii','ignore')
             c = c+1
             print c
