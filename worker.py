@@ -14,12 +14,13 @@ while beanstalk.peek_ready():
     output = open('test_output_redis.txt','w')
     # print url
     url = URL(job.body)
+    print MIMETYPE_WEBPAGE
     try:
         # s = url.download(timeout=2500)
         s = url.download(cache=True,timeout=100)
         # the_type = url.mimetype
         print the_type
-        print MIMETYPE_WEBPAGE
+
         if url.mimetype==MIMETYPE_WEBPAGE or url.mimetype==MIMETYPE_PLAINTEXT:
             s = plaintext(s)
             output.write(s.encode('ascii','ignore'))
