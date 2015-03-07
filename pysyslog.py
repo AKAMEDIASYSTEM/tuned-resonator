@@ -24,6 +24,7 @@ cnt = Counter()
 def isValid(line_in):
     # check for jpeg, jpg, gif, js, etc
     # return True if it's a valid url
+    # should we also reject duplicates here, by using a redis set?
     if 'Host'==line_in:
         return False
     if 'GET'==line_in:
@@ -37,9 +38,6 @@ def isValid(line_in):
                 return False
             if 'gravatar.com' in p.netloc: # this domain is just nasty, all infinite redirects and fury, signifying nothing
                 return False
-        cnt[line_in] += 1
-        if cnt[line_in] >1:
-            return False
         return True
     except:
         return False
