@@ -13,7 +13,13 @@ import redis
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 c=0
 output = open('test_output_redis.txt','w')
-while beanstalk.peek_ready():
+while True:
+    # take url, add to redis URL store WITH expire time set for EXPIRE_IN seconds.
+    # if result of redis INCR command is > 1, it means the URL was already there (but we still updated its TTL)
+    # so if result > 1, we should also resolve the url semantically (this should be another beanstalk tube, another job?)
+    # resolving the url means, fetch it in pattern and check the mimetype to ensure we only parse text -containing stuff
+    # then use pattern to get chunks and noun phrases and shove them in another redis store
+    # (where key is the phrase, and value is just INCR?)
     job = beanstalk.reserve()
     url = URL(job.body)
     try:
