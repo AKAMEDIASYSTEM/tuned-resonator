@@ -78,4 +78,5 @@ while True:
     job.delete()
     randy = r_text.randomkey()
     print 'random key got - it is', randy
+    print 'that key has this much time to live', randy.ttl()
 # output.close()
