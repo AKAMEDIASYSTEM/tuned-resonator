@@ -19,7 +19,7 @@ from collections import Counter
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
 'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
 local_host = '192.168.1.1'
-cnt = Counter()
+# cnt = Counter() # abandoned attempt at circular buffer here
 
 def isValid(line_in):
     # check for jpeg, jpg, gif, js, etc
