@@ -29,6 +29,7 @@ def isValid(line_in):
         return False
     try:
         p = urlparse(line_in)
+        print p
         for n in nixList:
             if p.path.endswith(n):
                 return False
