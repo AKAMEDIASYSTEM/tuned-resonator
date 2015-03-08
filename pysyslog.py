@@ -13,7 +13,7 @@ HOST, PORT = "192.168.1.2", 514
 # import logging
 import SocketServer
 import beanstalkc
-from urlparse import urlparse as parse
+from urlurlparse import urlparse
 from collections import Counter
 
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
@@ -30,7 +30,7 @@ def isValid(line_in):
     if 'GET'==line_in:
         return False
     try:
-        p = parse(line_in)
+        p = urlparse(line_in)
         for n in nixList:
             if p.path.endswith(n):
                 return False

@@ -4,7 +4,7 @@
 
 import beanstalkc
 from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT, HTTPError
-from urlparse import urlparse as parse
+from pattern.en import parse as text_parse # to keep distinct from urllib's parse
 import sys
 import redis
 
@@ -29,10 +29,8 @@ while True:
     pipe = r.pipeline(transaction=True)
     redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     print redis_response
-    isThere = redis_response[0]
-    print 'trying', url
 
-    if(isThere < 2):
+    if(redis_response[0] < 2):
         print 'new url, we think', url
         try:
             s = url.download(cached=True)
