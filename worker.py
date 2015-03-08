@@ -28,7 +28,7 @@ while True:
     isThere = r.incr(url) # upsert; if great than 1, URL is 'new'
     print 'isThere ', isThere
     r.expire(url, EXPIRE_IN) # update TTL for the url, is there really no way to do this in the line above?!
-    if(isThere > 1):
+    if(isThere < 2):
         print 'new url, we think ', url
         try:
             # s = url.download(timeout=2500)
