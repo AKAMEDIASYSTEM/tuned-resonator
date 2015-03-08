@@ -30,14 +30,14 @@ def isValid(line_in):
     try:
         # p = urlparse(line_in)
         p = urlsplit(line_in)
+        print p
+        if local_host in p.netloc:
+            return False
+        if 'gravatar.com' in p.netloc: # this domain is just nasty, all infinite redirects and fury, signifying nothing
+            return False
         for n in nixList:
             if p.path.endswith(n):
                 return False
-            if local_host in p.netloc:
-                return False
-            if 'gravatar.com' in p.netloc: # this domain is just nasty, all infinite redirects and fury, signifying nothing
-                return False
-        # print p
         return True
     except:
         return False
