@@ -36,7 +36,7 @@ while True:
             s = url.download(cached=True)
             print url.mimetype
             if (url.mimetype in MIMETYPE_WEBPAGE) or (url.mimetype in MIMETYPE_PLAINTEXT):
-                # s = plaintext(s)
+                s = plaintext(s)
                 '''
                 parsetree(string,
                        tokenize = True,         # Split punctuation marks from words?
@@ -47,13 +47,7 @@ while True:
                        encoding = 'utf-8'       # Input string encoding.
                          tagset = None)         # Penn Treebank II (default) or UNIVERSAL.
 '''
-                parsed = text_parse(plaintext(s),
-                    tokenize = False,
-                    tags = False,
-                    chunks = True,
-                    relations = False,
-                    lemmata = False,
-                    tagset = None)
+                parsed = text_parse(s, tokenize = False, tags = False, chunks = True, relations = False, lemmata = False, tagset = None)
                 print parsed
                 # do noun phrase extraction, add to redis store
                 # output.write(s.encode('ascii','ignore')) # deprecated, was for debug
