@@ -28,8 +28,8 @@ def isValid(line_in):
     if 'GET'==line_in:
         return False
     try:
-        # p = urlparse(line_in)
-        p = urlsplit(line_in)
+        p = urlparse(line_in)
+        # p = urlsplit(line_in)
         print p
         if local_host in p.netloc:
             return False
@@ -53,7 +53,7 @@ class SyslogUDPHandler(SocketServer.BaseRequestHandler):
             url = str(data).split(' ')[-3]
             if isValid(url):
                 beanstalk.put(url)
-                print(urlunsplit(url))
+                print(url)
             else:
                 pass
         # logging.info(str(data))
