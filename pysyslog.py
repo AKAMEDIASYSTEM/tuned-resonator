@@ -13,7 +13,7 @@ HOST, PORT = "192.168.1.2", 514
 # import logging
 import SocketServer
 import beanstalkc
-from urlparse import urlparse
+from urlparse import urlparse, urlsplit, urlunsplit
 
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
 'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
@@ -28,7 +28,8 @@ def isValid(line_in):
     if 'GET'==line_in:
         return False
     try:
-        p = urlparse(line_in)
+        # p = urlparse(line_in)
+        p = urlsplit(line_in)
         for n in nixList:
             if p.path.endswith(n):
                 return False
@@ -52,7 +53,7 @@ class SyslogUDPHandler(SocketServer.BaseRequestHandler):
             url = str(data).split(' ')[-3]
             if isValid(url):
                 beanstalk.put(url)
-                print(url)
+                print(urlunsplit(url))
             else:
                 pass
         # logging.info(str(data))

@@ -48,7 +48,7 @@ while True:
                          tagset = None)         # Penn Treebank II (default) or UNIVERSAL.
 '''
                 parsed = text_parse(s, chunks = True)
-                print parsed
+                # print parsed
                 # do noun phrase extraction, add to redis store
                 # output.write(s.encode('ascii','ignore')) # deprecated, was for debug
                 # print s.encode('ascii','ignore')
