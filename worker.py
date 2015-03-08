@@ -78,6 +78,6 @@ while True:
         # end of if(isThere < 2)
     job.delete()
     randy = r_text.randomkey()
-    print randy.uppercase()
+    print randy.upper()
     print 'that key has this much time to live', r_text.ttl(randy)
 # output.close()
