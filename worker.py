@@ -52,8 +52,9 @@ while True:
                 # parsed = text_parse(s, chunks = True)
                 parsed = parsetree(s, chunks=True)
                 print repr(parsed)
-                for chunk in parsed.chunks:
-                    print chunk.type, [(w.string, w.type) for w in chunk.words]
+                for sentence in parsed:
+                    for chunk in sentence.chunks:
+                        print chunk.type, [(w.string, w.type) for w in chunk.words]
 
                 # print parsed
                 # do noun phrase extraction, add to redis store
