@@ -13,7 +13,7 @@ HOST, PORT = "192.168.1.2", 514
 # import logging
 import SocketServer
 import beanstalkc
-import urlparse
+from urlparse import urlparse
 
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp'
 'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
