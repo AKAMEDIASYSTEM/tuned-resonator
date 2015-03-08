@@ -53,7 +53,9 @@ while True:
                 parsed = parsetree(s, chunks=True)
                 # print repr(parsed)
                 for sentence in parsed:
-                    if chunk.type=='NP' for chunk in sentence.chunks:
+                    gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type=='NP')
+                    for chunk in gen:
+                    # if chunk.type=='NP' for chunk in sentence.chunks:
                         print chunk.type, [(w.string, w.type) for w in chunk.words]
                         print chunk.string
 
