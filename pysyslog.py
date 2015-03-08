@@ -7,8 +7,8 @@
 ## That's it... it does nothing else...
 ## There are a few configuration parameters.
  
-LOG_FILE = 'remote_aka.log'
-HOST, PORT = "192.168.1.2", 514
+# LOG_FILE = 'remote_aka.log'
+HOST, PORT = "192.168.1.2", 514 # note HOST is your own IP, not IP of device sending log packets
 
 # import logging
 import SocketServer

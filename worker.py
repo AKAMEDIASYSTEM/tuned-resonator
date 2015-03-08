@@ -11,7 +11,8 @@ import redis
 EXPIRE_IN = 10800 # this is 3 hours in seconds
 
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
-r = redis.StrictRedis(host='localhost', port=6379, db=0)
+r_url = redis.StrictRedis(host='localhost', port=6379, db=0)
+r_text = redis.StrictRedis(host='localhost', port=6379, db=1)
 c=0 # debug counter
 # output = open('test_output_redis.txt','w') # deprecated, was for debug
 
@@ -26,7 +27,7 @@ while True:
 
     job = beanstalk.reserve() # this is blocking, waits till there's something on the stalk
     url = URL(job.body)
-    pipe = r.pipeline(transaction=True)
+    pipe = r_url.pipeline(transaction=True)
     redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute() # should I be updating the TTL? Experience-design question more than anything
     print redis_response
 
