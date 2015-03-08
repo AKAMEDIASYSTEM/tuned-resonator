@@ -5,6 +5,7 @@
 import beanstalkc
 from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT, HTTPError
 from pattern.en import parse as text_parse # to keep distinct from urllib's parse
+from pattern.en import parsetree
 import sys
 import redis
 
@@ -48,9 +49,11 @@ while True:
                        encoding = 'utf-8'       # Input string encoding.
                          tagset = None)         # Penn Treebank II (default) or UNIVERSAL.
                 '''
-                for line in s:
-                    print line
-                parsed = text_parse(s, chunks = True)
+                # parsed = text_parse(s, chunks = True)
+                parsed = parsetree(s, chunks=True)
+                for chunk in parsed.chunks:
+                    print chunk.type, [(w.string, w.type) for w in chunk.words]
+
                 # print parsed
                 # do noun phrase extraction, add to redis store
                 # output.write(s.encode('ascii','ignore')) # deprecated, was for debug
