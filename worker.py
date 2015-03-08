@@ -52,11 +52,12 @@ while True:
                 # parsed = text_parse(s, chunks = True)
                 parsed = parsetree(s, chunks=True)
                 for sentence in parsed:
+                    # only noun phrases for now but let's pick some good other ones next week
                     gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type=='NP')
                     for chunk in gen:
                     # if chunk.type=='NP' for chunk in sentence.chunks:
                         # print chunk.type, [(w.string, w.type) for w in chunk.words]
-                        print chunk.string
+                        # print chunk.string
                         pipe_text = r_text.pipeline(transaction=True)
                         r_response = pipe_text.set(chunk.string, chunk.type).expire(chunk.string, EXPIRE_IN).execute()
                         # print r_response
@@ -77,6 +78,6 @@ while True:
         # end of if(isThere < 2)
     job.delete()
     randy = r_text.randomkey()
-    print 'random key got - it is', randy
+    print randy.uppercase()
     print 'that key has this much time to live', r_text.ttl(randy)
 # output.close()
