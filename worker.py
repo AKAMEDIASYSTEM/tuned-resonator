@@ -48,6 +48,8 @@ while True:
                        encoding = 'utf-8'       # Input string encoding.
                          tagset = None)         # Penn Treebank II (default) or UNIVERSAL.
                 '''
+                for line in s:
+                    print line
                 parsed = text_parse(s, chunks = True)
                 # print parsed
                 # do noun phrase extraction, add to redis store
