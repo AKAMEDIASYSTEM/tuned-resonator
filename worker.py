@@ -14,7 +14,7 @@ EXPIRE_IN = 10800 # this is 3 hours in seconds
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 r_url = redis.StrictRedis(host='localhost', port=6379, db=0)
 r_text = redis.StrictRedis(host='localhost', port=6379, db=1)
-c=0 # debug counter
+# c=0 # debug counter
 # output = open('test_output_redis.txt','w') # deprecated, was for debug
 
 
@@ -30,7 +30,7 @@ while True:
     url = URL(job.body)
     pipe = r_url.pipeline(transaction=True)
     redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute() # should I be updating the TTL? Experience-design question more than anything
-    print redis_response
+    # print redis_response
 
     if(redis_response[0] < 2):
         print 'new url, we think', url
@@ -56,18 +56,18 @@ while True:
                     gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type=='NP')
                     for chunk in gen:
                     # if chunk.type=='NP' for chunk in sentence.chunks:
-                        print chunk.type, [(w.string, w.type) for w in chunk.words]
-                        # print chunk.string
+                        # print chunk.type, [(w.string, w.type) for w in chunk.words]
+                        print chunk.string
                         pipe_text = r_text.pipeline(transaction=True)
                         r_response = pipe_text.set(chunk.string, chunk.type).expire(chunk.string, EXPIRE_IN).execute()
-                        print r_response
+                        # print r_response
 
                 # print parsed
                 # do noun phrase extraction, add to redis store
                 # output.write(s.encode('ascii','ignore')) # deprecated, was for debug
                 # print s.encode('ascii','ignore')
-                c = c+1
-                print c
+                # c = c+1
+                # print c
             else:
                 'we failed the mimetype test again wtf'
         except HTTPError, e:
@@ -77,4 +77,6 @@ while True:
             print e
         # end of if(isThere < 2)
     job.delete()
+    randy = r_text.randomkey()
+    print 'random key got - it is', randy
 # output.close()
