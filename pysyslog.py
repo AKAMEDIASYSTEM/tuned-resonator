@@ -19,6 +19,8 @@ nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','js
 'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP']
 local_host = '192.168.1.1'
 
+# logging.basicConfig(level=logging.INFO, format='%(message)s', datefmt='', filename=LOG_FILE, filemode='a')
+
 def isValid(line_in):
     # check for jpeg, jpg, gif, js, etc
     # return True if it's a valid url
@@ -30,7 +32,7 @@ def isValid(line_in):
     try:
         p = urlparse(line_in)
         # p = urlsplit(line_in)
-        print p
+        # print p
         if local_host in p.netloc:
             return False
         if 'gravatar.com' in p.netloc: # this domain is just nasty, all infinite redirects and fury, signifying nothing
@@ -42,7 +44,7 @@ def isValid(line_in):
     except:
         return False
 
-# logging.basicConfig(level=logging.INFO, format='%(message)s', datefmt='', filename=LOG_FILE, filemode='a')
+
  
 class SyslogUDPHandler(SocketServer.BaseRequestHandler):
 
@@ -56,7 +58,6 @@ class SyslogUDPHandler(SocketServer.BaseRequestHandler):
                 print(url)
             else:
                 pass
-        # logging.info(str(data))
  
 if __name__ == "__main__":
     beanstalk = beanstalkc.Connection(host='localhost', port=14711)
