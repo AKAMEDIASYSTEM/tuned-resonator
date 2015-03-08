@@ -15,6 +15,9 @@ r = redis.StrictRedis(host='localhost', port=6379, db=0)
 c=0 # debug counter
 # output = open('test_output_redis.txt','w') # deprecated, was for debug
 
+def db_check(redis.Pipeline p):
+
+
 while True:
     # take url, add to redis URL store WITH expire time set for EXPIRE_IN seconds.
     # if result of redis INCR command is > 1, it means the URL was already there (but we still updated its TTL)
@@ -25,10 +28,15 @@ while True:
 
     job = beanstalk.reserve() # this is blocking, waits till there's something on the stalk
     url = URL(job.body)
+    pipe = r.Pipeline(transaction=True)
+    redis_response = pipe.incr(url).expire(EXPIRE_IN)
+    print redis_response
+    isThere = redis_response[0]
     print 'trying ', url
     isThere = r.incr(url) # upsert; if great than 1, URL is 'new'
     print 'isThere ', isThere
     r.expire(url, EXPIRE_IN) # update TTL for the url, is there really no way to do this in the line above?!
+    # wait those operations must be guaranteed atomic/uninterruptable, because any number of workers could be doing this to same url
     if(isThere < 2):
         print 'new url, we think ', url
         try:
