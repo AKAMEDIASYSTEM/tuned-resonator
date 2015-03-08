@@ -27,7 +27,7 @@ while True:
     job = beanstalk.reserve() # this is blocking, waits till there's something on the stalk
     url = URL(job.body)
     pipe = r.pipeline(transaction=True)
-    redis_response = pipe.incr(url).expire(url, EXPIRE_IN)
+    redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     print redis_response
     isThere = redis_response[0]
     print 'trying ', url
