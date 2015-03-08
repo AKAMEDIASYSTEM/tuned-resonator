@@ -30,18 +30,14 @@ while True:
     redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     print redis_response
     isThere = redis_response[0]
-    print 'trying ', url
+    print 'trying', url
     # isThere = r.incr(url) # upsert; if great than 1, URL is 'new'
-    print 'isThere ', isThere
-    # r.expire(url, EXPIRE_IN) # update TTL for the url, is there really no way to do this in the line above?!
-    # wait those operations must be guaranteed atomic/uninterruptable, because any number of workers could be doing this to same url
+    print 'new entry in DB', url if(isThere<2) else print 'already seen this url'
+
     if(isThere < 2):
-        print 'new url, we think ', url
+        print 'new url, we think', url
         try:
-            # s = url.download(timeout=2500)
-            # s = url.download(user_agent='Mozilla/5.0')
             s = url.download(cached=True)
-            # the_type = url.mimetype
             print url.mimetype
             if (url.mimetype in MIMETYPE_WEBPAGE) or (url.mimetype in MIMETYPE_PLAINTEXT):
                 s = plaintext(s)
@@ -52,12 +48,11 @@ while True:
                 print c
             else:
                 'we failed the mimetype test again wtf'
-        # except URLError, e:
         except HTTPError, e:
             # e = sys.exc_info()[0]
             # print 'URLError on ', url
             print url
             print e
-        # end of if(isThere > 1)
+        # end of if(isThere < 2)
     job.delete()
 # output.close()
