@@ -31,8 +31,6 @@ while True:
     print redis_response
     isThere = redis_response[0]
     print 'trying', url
-    # isThere = r.incr(url) # upsert; if great than 1, URL is 'new'
-    print 'new entry in DB' if(isThere < 2) else print 'already seen this url'
 
     if(isThere < 2):
         print 'new url, we think', url
