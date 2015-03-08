@@ -15,8 +15,6 @@ r = redis.StrictRedis(host='localhost', port=6379, db=0)
 c=0 # debug counter
 # output = open('test_output_redis.txt','w') # deprecated, was for debug
 
-def db_check(redis.Pipeline p):
-
 
 while True:
     # take url, add to redis URL store WITH expire time set for EXPIRE_IN seconds.
