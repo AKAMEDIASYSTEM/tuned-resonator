@@ -29,7 +29,6 @@ def isValid(line_in):
         return False
     try:
         p = urlparse(line_in)
-        print p
         for n in nixList:
             if p.path.endswith(n):
                 return False
@@ -37,6 +36,7 @@ def isValid(line_in):
                 return False
             if 'gravatar.com' in p.netloc: # this domain is just nasty, all infinite redirects and fury, signifying nothing
                 return False
+        print p
         return True
     except:
         return False
