@@ -27,13 +27,13 @@ while True:
     job = beanstalk.reserve() # this is blocking, waits till there's something on the stalk
     url = URL(job.body)
     pipe = r.pipeline(transaction=True)
-    redis_response = pipe.incr(url).expire(EXPIRE_IN)
+    redis_response = pipe.incr(url).expire(url, EXPIRE_IN)
     print redis_response
     isThere = redis_response[0]
     print 'trying ', url
-    isThere = r.incr(url) # upsert; if great than 1, URL is 'new'
+    # isThere = r.incr(url) # upsert; if great than 1, URL is 'new'
     print 'isThere ', isThere
-    r.expire(url, EXPIRE_IN) # update TTL for the url, is there really no way to do this in the line above?!
+    # r.expire(url, EXPIRE_IN) # update TTL for the url, is there really no way to do this in the line above?!
     # wait those operations must be guaranteed atomic/uninterruptable, because any number of workers could be doing this to same url
     if(isThere < 2):
         print 'new url, we think ', url
