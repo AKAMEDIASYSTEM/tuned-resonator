@@ -51,6 +51,7 @@ while True:
                 '''
                 # parsed = text_parse(s, chunks = True)
                 parsed = parsetree(s, chunks=True)
+                print repr(parsed)
                 for chunk in parsed.chunks:
                     print chunk.type, [(w.string, w.type) for w in chunk.words]
 
