@@ -51,7 +51,6 @@ while True:
                 '''
                 # parsed = text_parse(s, chunks = True)
                 parsed = parsetree(s, chunks=True)
-                # print repr(parsed)
                 for sentence in parsed:
                     gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type=='NP')
                     for chunk in gen:
