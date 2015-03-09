@@ -18,7 +18,7 @@ zeitgeist = r_text.randomkey()
 if zeitgeist is None:
     zeitgeist = 'redis is unavailable!'
 
-# create XML 
+# create XML
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
