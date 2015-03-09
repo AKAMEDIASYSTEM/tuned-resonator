@@ -20,7 +20,7 @@ zeitgeist = r_text.randomkey()
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
-t_name._setText(zeitgeist)
+t_name._setText('AKA TUNED-RESONATOR CURRICULUM-BARNACLE\n'+zeitgeist)
 t_service = objectify.SubElement(root, 'service')
 tt_hostname = objectify.SubElement(t_service, 'host-name')
 tt_hostname._setText(hostname)
