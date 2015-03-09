@@ -6,6 +6,7 @@ Requires=curriculum-syslog.service
 [Service]
 Type=simple
 WorkingDirectory=/root/tuned-resonator/server/
-ExecStart=/usr/bin/python server.py &
+ExecStart=/usr/bin/python server.py
+Restart=on-abort
 RestartSec=5
 KillMode=process
