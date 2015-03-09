@@ -20,6 +20,8 @@ class BrowserHandler(BaseHandler):
         db = self.settings['db']
         logging.debug('hit the BrowserHandler endpoint with t=', t)
         phrase = db.randomkey()
+        if phrase is None:
+            phrase = 'no recent results'
         d = {'title':'tuned-resonator curriculum-barnacle test',
         'noun_phrase':phrase}
         self.response = ResponseObject('200','Success', d)
