@@ -8,3 +8,6 @@ ExecStart=/usr/bin/python pysyslog.py
 Restart=on-abort
 RestartSec=5
 KillMode=process
+
+[Install]
+WantedBy=multi-user.target

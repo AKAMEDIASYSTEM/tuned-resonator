@@ -10,3 +10,6 @@ ExecStart=/usr/bin/python server.py
 Restart=on-abort
 RestartSec=5
 KillMode=process
+
+[Install]
+WantedBy=multi-user.target

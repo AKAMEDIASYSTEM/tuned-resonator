@@ -9,3 +9,6 @@ WorkingDirectory=/root/tuned-resonator/
 ExecStart=/usr/bin/python resonator.py
 RestartSec=5
 KillMode=process
+
+[Install]
+WantedBy=multi-user.target

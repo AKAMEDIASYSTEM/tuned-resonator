@@ -8,3 +8,6 @@ ExecStart=/bin/sh beanstalk.sh
 Restart=on-abort
 RestartSec=5
 KillMode=process
+
+[Install]
+WantedBy=multi-user.target
