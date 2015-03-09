@@ -1,8 +1,0 @@
-[Unit]
-Description=AKA tuned-resonator server service
-
-[Service]
-Type=simple
-WorkingDirectory=/root/tuned-resonator/server/
-ExecStart=/usr/bin/python server.py &
-KillMode=process
