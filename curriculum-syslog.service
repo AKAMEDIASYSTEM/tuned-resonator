@@ -1,0 +1,8 @@
+[Unit]
+Description=AKA tuned-resonator curriculum-barnacle syslog service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/tuned-resonator/
+ExecStart=/usr/bin/python pysyslog.py &
+KillMode=process

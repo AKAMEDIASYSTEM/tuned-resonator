@@ -1,0 +1,10 @@
+[Unit]
+Description=AKA tuned-resonator curriculum-barnacle syslog timer
+
+[Timer]
+OnActiveSec=200
+OnUnitInactiveSec=3
+Unit=curriculum-syslog.service
+
+[Install]
+WantedBy=multi-user.target

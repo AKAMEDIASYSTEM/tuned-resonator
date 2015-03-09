@@ -1,0 +1,10 @@
+[Unit]
+Description=AKA tuned-resonator curriculum-barnacle resonator (mDNS updater) timer
+
+[Timer]
+OnActiveSec=200
+OnUnitInactiveSec=10
+Unit=curriculum-resonator.service
+
+[Install]
+WantedBy=multi-user.target
