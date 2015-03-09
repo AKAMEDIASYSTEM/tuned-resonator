@@ -21,7 +21,7 @@ root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
 tempText = 'CURRICULUM:'+zeitgeist
-t_name._setText(tempText)
+t_name._setText('CURRICULUM-BARNACLE')
 t_service = objectify.SubElement(root, 'service')
 tt_hostname = objectify.SubElement(t_service, 'host-name')
 tt_hostname._setText(hostname)
