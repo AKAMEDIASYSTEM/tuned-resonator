@@ -14,9 +14,9 @@ import redis
 
 hostname = 'donald.lan'
 r_text = redis.StrictRedis(host='localhost', port=6379, db=1)
-print r_text
 zeitgeist = r_text.randomkey()
-print zeitgeist
+if zeitgeist is None:
+    zeitgeist = 'redis is unavailable!'
 
 # create XML 
 root = objectify.Element('service-group')

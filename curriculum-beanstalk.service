@@ -5,4 +5,5 @@ Description=AKA tuned-resonator curriculum-barnacle beanstalk service
 Type=simple
 WorkingDirectory=/root/tuned-resonator/
 ExecStart=/bin/sh beanstalk.sh
+RestartSec=5
 KillMode=process

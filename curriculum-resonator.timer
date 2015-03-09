@@ -3,7 +3,7 @@ Description=AKA tuned-resonator curriculum-barnacle resonator (mDNS updater) tim
 
 [Timer]
 OnActiveSec=200
-OnUnitInactiveSec=10
+OnUnitInactiveSec=5
 Unit=curriculum-resonator.service
 
 [Install]
