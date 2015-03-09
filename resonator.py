@@ -20,7 +20,8 @@ zeitgeist = r_text.randomkey()
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
 t_name.attrib['replace-wildcards'] = 'yes'
-t_name._setText('http://donald.lan/?t=Minutes_into_the_past')
+temp = 'http://donald.lan/?t='+zeitgeist
+t_name._setText(temp)
 t_service = objectify.SubElement(root, 'service')
 tt_hostname = objectify.SubElement(t_service, 'host-name')
 tt_hostname._setText(hostname)
@@ -29,8 +30,7 @@ tt_type._setText('_http._tcp')
 tt_port = objectify.SubElement(t_service, 'port')
 tt_port._setText('80')
 tt_txtrecord = objectify.SubElement(t_service, 'txt-record')
-temp = 'path=/'+zeitgeist
-tt_txtrecord._setText(temp)
+tt_txtrecord._setText('path=/')
 objectify.deannotate(root, cleanup_namespaces=True)
 s = '<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group SYSTEM "avahi-service.dtd">'+etree.tostring(root, pretty_print=True)
 # print s
