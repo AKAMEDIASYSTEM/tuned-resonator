@@ -13,7 +13,10 @@ class BrowserHandler(BaseHandler):
     """HTML display of Keywords browsed in the last day"""
 
     def get(self):
-        minutes = self.get_argument('t')
+        try:
+            t = self.get_argument('t')
+        except:
+            t = 10800
         db = self.settings['db']
         logging.debug('hit the BrowserHandler endpoint with t=', t)
         phrase = db.randomkey()
