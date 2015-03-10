@@ -16,7 +16,7 @@ class BrowserHandler(BaseHandler):
         try:
             t = self.get_argument('t')
         except:
-            t = 10800
+            t = 10800 # three hours, should be global EXPIRE_IN from worker.py
         db = self.settings['db']
         logging.debug('hit the BrowserHandler endpoint with t=', t)
         phrase = db.randomkey()

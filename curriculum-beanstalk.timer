@@ -2,7 +2,7 @@
 Description=AKA tuned-resonator curriculum-barnacle beanstalk timer
 
 [Timer]
-OnActiveSec=30
+OnActiveSec=45
 OnUnitInactiveSec=1
 Unit=curriculum-beanstalk.service
 

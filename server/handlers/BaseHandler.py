@@ -30,16 +30,3 @@ class BaseHandler(tornado.web.RequestHandler):
         except Exception as reason:
             print reason, traceback.format_exc()
             print self.response.response
-
-    # def isAuth(self):
-    #     # logging.info('entering isAuth function in BaseHandler')
-    #     db = self.settings['db']
-    #     isAuth = db.users.find(
-    #         {'$and':
-    #             [
-    #                 {'groupID' : self.groupID},
-    #                 {'token' : self.token}
-    #                 ]
-    #         }).count()
-    #     # logging.info('found %s matches for isAuth'%isAuth)
-    #     return isAuth
