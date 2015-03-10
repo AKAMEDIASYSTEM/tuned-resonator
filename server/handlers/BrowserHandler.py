@@ -15,7 +15,7 @@ class BrowserHandler(BaseHandler):
     """HTML display of Keywords browsed in the last day"""
 
     def get(self):
-        loader = tornado.template.Loader('../templates')
+        loader = tornado.template.Loader('../server/templates')
         try:
             n = self.get_argument('n')
         except:
