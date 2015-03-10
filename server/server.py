@@ -5,6 +5,7 @@
 import tornado.ioloop
 import tornado.web
 from handlers.BrowserHandler import BrowserHandler
+from handlers.ApiHandler import ApiHandler
 import redis
 # from handlers.APIHandler import APIHandler
 
