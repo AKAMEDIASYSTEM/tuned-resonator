@@ -7,7 +7,7 @@ Requires=curriculum-beanstalk.service
 Type=simple
 WorkingDirectory=/root/tuned-resonator/
 ExecStart=/usr/bin/python pysyslog.py
-Restart=on-abort
+Restart=always
 RestartSec=5
 KillMode=process
 
