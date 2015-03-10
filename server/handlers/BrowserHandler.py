@@ -24,7 +24,7 @@ class BrowserHandler(BaseHandler):
         logging.debug('hit the BrowserHandler endpoint with n=', n)
         keywords = []
         found = 0
-        while found < 4:
+        while found < n:
             k = db.randomkey()
             if k not in keywords:
                 keywords.append(k)
