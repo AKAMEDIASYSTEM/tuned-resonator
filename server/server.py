@@ -18,6 +18,7 @@ settings = dict(
 )
 
 application = tornado.web.Application([
+    (r"/api", ApiHandler),
     (r"/", BrowserHandler),
     # (r"/api", APIHandler)
 ], db=db, **settings)

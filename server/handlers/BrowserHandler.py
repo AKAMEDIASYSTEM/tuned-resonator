@@ -8,22 +8,26 @@ import tornado
 import random
 from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
+from tornado.template import Template
+from tornado.template import Loader
 
 class BrowserHandler(BaseHandler):
     """HTML display of Keywords browsed in the last day"""
 
     def get(self):
+        loader = tornado.template.Loader('../templates')
         try:
-            t = self.get_argument('t')
+            n = self.get_argument('n')
         except:
-            t = 10800 # three hours, should be global EXPIRE_IN from worker.py
+            n = 3 # three terms
         db = self.settings['db']
-        logging.debug('hit the BrowserHandler endpoint with t=', t)
-        phrase = db.randomkey()
-        if phrase is None:
-            phrase = 'no recent results'
-        d = {'title':'tuned-resonator curriculum-barnacle test',
-        'noun_phrase':phrase}
-        self.response = ResponseObject('200','Success', d)
-        self.write_response()
+        logging.debug('hit the BrowserHandler endpoint with n=', n)
+        keywords = []
+        found = 0
+        while found < 4:
+            k = db.randomkey()
+            if k not in keywords:
+                keywords.append(k)
+                found += 1
+        self.write(loader.load("zen.html").generate(keywords=keywords))
         self.finish()

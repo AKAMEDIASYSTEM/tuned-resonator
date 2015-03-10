@@ -17,7 +17,7 @@ r_text = redis.StrictRedis(host='localhost', port=6379, db=1)
 zeitgeist = r_text.randomkey()
 if zeitgeist is None:
     zeitgeist = 'redis is unavailable!'
-
+# here zeitgeist should be made XML-compliant via a truly opaque regex because:XML is nasty
 # create XML
 root = objectify.Element('service-group')
 t_name = objectify.SubElement(root, 'name')
