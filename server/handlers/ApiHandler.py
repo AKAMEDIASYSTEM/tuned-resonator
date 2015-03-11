@@ -12,16 +12,23 @@ class ApiHandler(BaseHandler):
 
     def get(self):
         try:
-            t = self.get_argument('t')
+            n = self.get_argument('n')
         except:
-            t = 10800 # three hours, should be global EXPIRE_IN from worker.py
+            n = 3 # three hours, should be global EXPIRE_IN from worker.py
         db = self.settings['db']
         logging.debug('hit the BrowserHandler endpoint with t=', t)
-        phrase = db.randomkey()
-        if phrase is None:
-            phrase = 'no recent results'
+        keywords = []
+        found = 0
+        while found < int(n):
+            k = db.randomkey()
+            if k is not None:
+                if k not in keywords:
+                    keywords.append(k)
+                    found += 1
+            else:
+                keywords = ['no recent results']
         d = {'title':'tuned-resonator curriculum-barnacle test',
-        'noun_phrase':phrase}
+        'noun_phrase':keywords}
         self.response = ResponseObject('200','Success', d)
         self.write_response()
         self.finish()
