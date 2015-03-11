@@ -14,7 +14,7 @@ import redis
 import re
 
 hn = open('/etc/hostname')
-hostname = hn.readline()[:-1] # drop triailing newline
+hostname = hn.readline()[:-1]+'.local' # drop triailing newline
 hostname_text = 'http://'+hostname
 r_text = redis.StrictRedis(host='localhost', port=6379, db=1)
 zeitgeist = r_text.randomkey()
