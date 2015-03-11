@@ -11,10 +11,10 @@ it queries a random term from recent browsing and updates the .service file that
 from lxml import etree
 from lxml import objectify
 import redis
-from subprocess import call
+import re
 
-# hostname = 'curriculum.local' # we shouldn't need this
-hostname = call(['cat','/etc/hostname'])
+hn = open('/etc/hostname')
+hostname = hn.readline()[:-1] # drop triailing newline
 hostname_text = 'http://'+hostname
 r_text = redis.StrictRedis(host='localhost', port=6379, db=1)
 zeitgeist = r_text.randomkey()
