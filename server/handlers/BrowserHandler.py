@@ -16,10 +16,7 @@ class BrowserHandler(BaseHandler):
 
     def get(self):
         loader = tornado.template.Loader('../server/templates')
-        try:
-            n = self.get_argument('n')
-        except:
-            n = 3 # three terms
+        n = self.get_argument('n', 3)
         db = self.settings['db']
         logging.debug('hit the BrowserHandler endpoint with n=', n)
         keywords = []
