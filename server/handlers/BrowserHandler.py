@@ -19,8 +19,11 @@ class BrowserHandler(BaseHandler):
         found = 0
         while found < int(n):
             k = db.randomkey()
-            if k not in keywords:
-                keywords.append(k)
-                found += 1
+            if k is not None:
+                if k not in keywords:
+                    keywords.append(k)
+                    found += 1
+            else:
+                keywords.append('no results yet')
         self.write(loader.load("zen.html").generate(keywords=keywords))
         self.finish()
