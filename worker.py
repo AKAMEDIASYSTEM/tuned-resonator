@@ -4,12 +4,10 @@
 
 import beanstalkc
 from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT, HTTPError
-from pattern.en import parse as text_parse # to keep distinct from urllib's parse
 from pattern.en import parsetree
-import sys
 import redis
 
-EXPIRE_IN = 10800 # this is 3 hours in seconds
+EXPIRE_IN = 10800  # this is 3 hours in seconds
 
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 r_url = redis.StrictRedis(host='localhost', port=6379, db=0)
@@ -26,10 +24,10 @@ while True:
     # then use pattern to get chunks and noun phrases and shove them in another redis store
     # (where key is the phrase, and value is just INCR?)
 
-    job = beanstalk.reserve() # this is blocking, waits till there's something on the stalk
+    job = beanstalk.reserve()  # this is blocking, waits till there's something on the stalk
     url = URL(job.body)
     pipe = r_url.pipeline(transaction=True)
-    redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute() # should I be updating the TTL? Experience-design question more than anything
+    redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()  # should I be updating the TTL? Experience-design question more than anything
     # print redis_response
 
     if(redis_response[0] < 2):
@@ -53,7 +51,7 @@ while True:
                 parsed = parsetree(s, chunks=True)
                 for sentence in parsed:
                     # only noun phrases for now but let's pick some good other ones next week
-                    gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type=='NP')
+                    gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type == 'NP')
                     for chunk in gen:
                     # if chunk.type=='NP' for chunk in sentence.chunks:
                         # print chunk.type, [(w.string, w.type) for w in chunk.words]
@@ -77,7 +75,3 @@ while True:
             print e
         # end of if(isThere < 2)
     job.delete()
-    randy = r_text.randomkey()
-    print randy.upper()
-    print 'that key has this much time to live', r_text.ttl(randy)
-# output.close()
