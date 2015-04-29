@@ -6,14 +6,16 @@ import tornado.ioloop
 import tornado.web
 from handlers.BrowserHandler import BrowserHandler
 from handlers.ApiHandler import ApiHandler
+from handlers.ApiHandler import SubmitHandler
 import redis
 
-settings = {'debug':True}
+settings = {'debug': True}
 db = redis.StrictRedis(host='localhost', port=6379, db=1)
 
 application = tornado.web.Application([
     (r"/api", ApiHandler),
     (r"/", BrowserHandler),
+    (r"/submit", SubmitHandler),
 ], db=db, **settings)
 
 if __name__ == "__main__":
