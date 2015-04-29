@@ -13,7 +13,7 @@ class ApiHandler(BaseHandler):
         try:
             n = self.get_argument('n')
         except:
-            n = 3  # three hours, should be global EXPIRE_IN from worker.py
+            n = 3  # three terms
         db = self.settings['db']
         print 'hit the BrowserHandler endpoint with n=', n
         keywords = []

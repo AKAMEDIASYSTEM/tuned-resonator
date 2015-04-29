@@ -6,28 +6,26 @@
 ## entries on a specified port and save them to a file.
 ## That's it... it does nothing else...
 ## There are a few configuration parameters.
- 
 # LOG_FILE = 'remote_aka.log'
-HOST, PORT = "192.168.1.2", 514 # note HOST is your own IP, not IP of device sending log packets
+HOST, PORT = "192.168.1.2", 514  # note HOST is your own IP, not IP of device sending log packets
 
 # import logging
 import SocketServer
 import beanstalkc
-from urlparse import urlparse, urlsplit, urlunsplit
+from urlparse import urlparse
 
 nixList = ['png','jpeg','jpg','css','js','ipa','ico','gif','mov','mp4','svg','json','woff','woff2','pdf','mp3','crl','webp','jsonp','webm'
 'PNG','JPEG','JPG','CSS','JS','IPA','ICO','GIF','MOV','MP4','SVG','JSON','WOFF','WOFF2','PDF','MP3','CRL','WEBP','JSONP','WEBM']
 local_host = '192.168.1.1'
 
-# logging.basicConfig(level=logging.INFO, format='%(message)s', datefmt='', filename=LOG_FILE, filemode='a')
 
 def isValid(line_in):
     # check for jpeg, jpg, gif, js, etc
     # return True if it's a valid url
     # should we also reject duplicates here, by using a redis set?
-    if 'Host'==line_in:
+    if 'Host' == line_in:
         return False
-    if 'GET'==line_in:
+    if 'GET' == line_in:
         return False
     try:
         p = urlparse(line_in)
@@ -35,7 +33,7 @@ def isValid(line_in):
         # print p
         if local_host in p.netloc:
             return False
-        if 'gravatar.com' in p.netloc: # this domain is just nasty, all infinite redirects and fury, signifying nothing
+        if 'gravatar.com' in p.netloc:  # this domain is just nasty, all infinite redirects and fury, signifying nothing
             return False
         for n in nixList:
             if p.path.endswith(n):
@@ -45,7 +43,6 @@ def isValid(line_in):
         return False
 
 
- 
 class SyslogUDPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
@@ -58,11 +55,11 @@ class SyslogUDPHandler(SocketServer.BaseRequestHandler):
                 print(url)
             else:
                 pass
- 
+
 if __name__ == "__main__":
     beanstalk = beanstalkc.Connection(host='localhost', port=14711)
     try:
-        server = SocketServer.UDPServer((HOST,PORT), SyslogUDPHandler)
+        server = SocketServer.UDPServer((HOST, PORT), SyslogUDPHandler)
         server.serve_forever(poll_interval=0.5)
     except (IOError, SystemExit):
         raise
