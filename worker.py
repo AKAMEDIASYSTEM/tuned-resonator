@@ -53,19 +53,9 @@ while True:
                     # only noun phrases for now but let's pick some good other ones next week
                     gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type == 'NP')
                     for chunk in gen:
-                    # if chunk.type=='NP' for chunk in sentence.chunks:
-                        # print chunk.type, [(w.string, w.type) for w in chunk.words]
-                        # print chunk.string
                         pipe_text = r_text.pipeline(transaction=True)
                         r_response = pipe_text.set(chunk.string, chunk.type).expire(chunk.string, EXPIRE_IN).execute()
                         # print r_response
-
-                # print parsed
-                # do noun phrase extraction, add to redis store
-                # output.write(s.encode('ascii','ignore')) # deprecated, was for debug
-                # print s.encode('ascii','ignore')
-                # c = c+1
-                # print c
             else:
                 'we failed the mimetype test again wtf'
         except HTTPError, e:
@@ -73,5 +63,8 @@ while True:
             # print 'URLError on ', url
             print url
             print e
+        except:
+            print url
+            print 'AKA unhandled exception that we will try to just destroy without halting and catching fire'
         # end of if(isThere < 2)
     job.delete()

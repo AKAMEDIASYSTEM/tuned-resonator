@@ -8,7 +8,7 @@ from handlers.BaseHandler import BaseHandler
 
 
 class BrowserHandler(BaseHandler):
-    """HTML display of Keywords browsed in the last day"""
+    '''HTML display of Keywords browsed in the last day'''
 
     def get(self):
         loader = tornado.template.Loader('../server/templates')

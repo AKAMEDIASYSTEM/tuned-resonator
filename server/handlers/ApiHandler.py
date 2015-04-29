@@ -2,10 +2,9 @@
 # tuned-resonator
 # experiments with google physical-web mdns broadcast
 
-import logging
-import tornado
 from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
+
 
 class ApiHandler(BaseHandler):
     """json access to local curriculum store"""
@@ -14,7 +13,7 @@ class ApiHandler(BaseHandler):
         try:
             n = self.get_argument('n')
         except:
-            n = 3 # three hours, should be global EXPIRE_IN from worker.py
+            n = 3  # three hours, should be global EXPIRE_IN from worker.py
         db = self.settings['db']
         print 'hit the BrowserHandler endpoint with n=', n
         keywords = []
@@ -27,8 +26,7 @@ class ApiHandler(BaseHandler):
                     found += 1
             else:
                 keywords = ['no recent results']
-        d = {'title':'tuned-resonator curriculum-barnacle test',
-        'noun_phrase':keywords}
-        self.response = ResponseObject('200','Success', d)
+        d = {'title': 'tuned-resonator curriculum-barnacle test', 'noun_phrase': keywords}
+        self.response = ResponseObject('200', 'Success', d)
         self.write_response()
         self.finish()
