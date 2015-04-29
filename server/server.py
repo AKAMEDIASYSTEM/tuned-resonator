@@ -6,7 +6,7 @@ import tornado.ioloop
 import tornado.web
 from handlers.BrowserHandler import BrowserHandler
 from handlers.ApiHandler import ApiHandler
-from handlers.ApiHandler import SubmitHandler
+from handlers.SubmitHandler import SubmitHandler
 import redis
 
 settings = {'debug': True}
