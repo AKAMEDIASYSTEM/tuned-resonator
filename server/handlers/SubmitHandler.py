@@ -15,7 +15,7 @@ class SubmitHandler(BaseHandler):
         url = self.get_argument('url', None)
         print 'inside curriculum-insular SubmitHandler', url
         if url is not None:
-            beanstalk.put(url)
+            beanstalk.put(str(url))
 
         self.response = ResponseObject('200', 'Success')
         self.write_response()
