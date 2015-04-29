@@ -1,7 +1,7 @@
 [Unit]
 Description=AKA tuned-resonator curriculum-barnacle server service
-After=curriculum-syslog.service
-Requires=curriculum-syslog.service
+After=curriculum-beanstalk.service
+Requires=curriculum-beanstalk.service
 
 [Service]
 Type=simple
