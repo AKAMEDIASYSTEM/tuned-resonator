@@ -68,4 +68,4 @@ while True:
             print 'AKA unhandled exception that we will try to just destroy without halting and catching fire'
         # end of if(isThere < 2)
     print 'processed and now deleting ', url
-    job.delete()
+    print job.delete()
