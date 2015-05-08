@@ -66,5 +66,7 @@ while True:
             print url
             print 'AKA unhandled exception that we will try to just destroy without halting and catching fire'
         # end of if(isThere < 2)
-    print 'processed and now deleting ', url
+        print 'processed and now deleting ', url
+    else:
+        print '%s already exists in redis-url store, so ignoring' % url
     job.delete()
