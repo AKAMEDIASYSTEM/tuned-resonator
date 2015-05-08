@@ -9,7 +9,7 @@ import redis
 
 EXPIRE_IN = 10800  # this is 3 hours in seconds
 
-beanstalk = beanstalkc.Connection(host='localhost', port=14711)
+beanstalk = beanstalkc.Connection(host='localhost', port=14711, parse_yaml=False)
 r_url = redis.StrictRedis(host='localhost', port=6379, db=0)
 r_text = redis.StrictRedis(host='localhost', port=6379, db=1)
 # c=0 # debug counter
