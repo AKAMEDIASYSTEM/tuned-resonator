@@ -55,9 +55,8 @@ while True:
                     for chunk in gen:
                         pipe_text = r_text.pipeline(transaction=True)
                         r_response = pipe_text.set(chunk.string, chunk.type).expire(chunk.string, EXPIRE_IN).execute()
-                        # print r_response
             else:
-                'we failed the mimetype test again wtf'
+                'it is a mimetype we should ignore'
         except HTTPError, e:
             # e = sys.exc_info()[0]
             # print 'URLError on ', url
@@ -68,4 +67,4 @@ while True:
             print 'AKA unhandled exception that we will try to just destroy without halting and catching fire'
         # end of if(isThere < 2)
     print 'processed and now deleting ', url
-    print job.delete()
+    job.delete()
